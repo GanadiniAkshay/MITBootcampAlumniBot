@@ -31,7 +31,7 @@ bot.dialog('/',intents);
 
 intents.matches(/^facebook/i,[
     function (session,args) {
-        console.log(args);
+        console.log(session.message);
         session.send('check console for message data');
     }
 ]);
