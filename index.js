@@ -29,7 +29,7 @@ server.post('/api/messages',connector.listen());
 var intents = new builder.IntentDialog();
 bot.dialog('/',intents);
 
-intents.matches('/^facebook/i',[
+intents.matches(/^facebook/i,[
     function (session) {
         console.log(session);
         session.send('check console for message data');
