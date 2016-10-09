@@ -31,7 +31,15 @@ bot.dialog('/',intents);
 
 intents.matches(/^facebook/i,[
     function (session,args) {
-        console.log(session.message);
+        FB.api(
+            '/1129794080449050',
+            'GET',
+            {},
+            function(response) {
+                // Insert your code here
+                console.log(response);
+            }
+        );
         session.send('check console for message data');
     }
 ]);
