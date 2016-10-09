@@ -17,3 +17,27 @@ var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
+
+var bot = new builder.UniversalBot(connector);
+server.post('/api/messages',connector.listen());
+
+
+//=====================================================
+// Bots Dialogs
+//=====================================================
+
+var intents = new builder.IntentDialog();
+bot.dialog('/',intents);
+
+intents.matches('/^facebook',[
+    function (session) {
+        console.log(session);
+        session.send('check console for message data');
+    }
+]);
+
+intents.onDefault([
+    function (session){
+        session.send('Hi, user');
+    }
+])
