@@ -64,7 +64,7 @@ bot.dialog('/ensureName',[
 
 bot.dialog('/ensureEmail',[
     function(session){
-        prompts.text("What's your email id?");
+        builder.Prompts.text("What's your email id?");
     },
     function (session,results){
         session.userData.email = results.response;
