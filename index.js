@@ -37,6 +37,9 @@ intents.matches(/^facebook/i,[
         }else{
             next();
         }
+    },
+    function (session){
+        session.send("Hi, %s", session.userData.firstName);
     }
 ]);
 
