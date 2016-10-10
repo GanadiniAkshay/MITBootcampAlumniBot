@@ -29,19 +29,6 @@ server.post('/api/messages',connector.listen());
 var intents = new builder.IntentDialog();
 bot.dialog('/',intents);
 
-intents.matches(/^facebook/i,[
-    function (session,args,next)
-    {
-        if (!session.userData.firstName){
-            session.beginDialog('/ensureName');
-        }else{
-            next();
-        }
-    },
-    function (session){
-        session.send("Hi, %s", session.userData.firstName);
-    }
-]);
 
 intents.onDefault([
     function (session,args,next)
@@ -51,6 +38,13 @@ intents.onDefault([
         }else{
             next();
         }
+    },
+    function (session, args, next){
+       if (!session.userData.email){
+            session.beginDialog('/ensureEmail');
+        }else{
+            next();
+        } 
     },
     function (session){
         session.send('Hi, user %s',session.message.user.id);
@@ -64,6 +58,16 @@ bot.dialog('/ensureName',[
         name = session.message.user.name.split(" ");
         session.userData.firstName = name[0];
         session.userData.lastName  = name[1];
+        session.endDialog();
+    }
+]);
+
+bot.dialog('/ensureEmail',[
+    function(session){
+        prompts.text("What's your email id?");
+    },
+    function (session,results){
+        session.userData.email = results.response;
         session.endDialog();
     }
 ]);
