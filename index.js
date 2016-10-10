@@ -33,18 +33,11 @@ bot.dialog('/',intents);
 intents.onDefault([
     function (session,args,next)
     {
-        if (!session.userData.firstName){
-            session.beginDialog('/ensureName');
+        if (!session.userData.email){
+            session.beginDialog('/ensureProfile');
         }else{
             next();
         }
-    },
-    function (session, args, next){
-       if (!session.userData.email){
-            session.beginDialog('/ensureEmail');
-        }else{
-            next();
-        } 
     },
     function (session){
         session.send('Hi, user %s',session.message.user.id);
@@ -53,20 +46,14 @@ intents.onDefault([
 
 
 
-bot.dialog('/ensureName',[
-    function(session){
-        name = session.message.user.name.split(" ");
-        session.userData.firstName = name[0];
-        session.userData.lastName  = name[1];
-        session.endDialog();
-    }
-]);
-
-bot.dialog('/ensureEmail',[
+bot.dialog('/ensureProfile',[
     function(session){
         builder.Prompts.text("What's your email id?");
     },
     function (session,results){
+        name = session.message.user.name.split(" ");
+        session.userData.firstName = name[0];
+        session.userData.lastName  = name[1];
         session.userData.email = results.response;
         session.endDialog();
     }
