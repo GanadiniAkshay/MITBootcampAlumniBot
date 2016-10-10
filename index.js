@@ -48,7 +48,7 @@ intents.onDefault([
 
 bot.dialog('/ensureProfile',[
     function(session){
-        builder.Prompts.text("What's your email id?");
+        builder.Prompts.text(session, "What's your email id?");
     },
     function (session,results){
         name = session.message.user.name.split(" ");
