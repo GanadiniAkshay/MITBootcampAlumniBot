@@ -41,6 +41,13 @@ server.post('/api/messages',connector.listen());
 var intents = new builder.IntentDialog();
 bot.dialog('/',intents);
 
+intents.matches(/^delete/i,[
+    function (session){
+        session.sendTyping();
+        session.userData = {};
+        session.send('Profile Reset');
+    }
+]);
 
 intents.onDefault([
     function (session,args,next)
