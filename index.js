@@ -31,8 +31,10 @@ bot.dialog('/',intents);
 
 intents.matches(/^facebook/i,[
     function (session,args) {
-        console.log(session.message.user.name);
-        session.send('check console for message data');
+        name = session.message.user.name.split();
+        session.userData.firstName = name[0];
+        session.userData.lastName  = name[1];
+        session.send('Hi, %s',session.userData.firstName);
     }
 ]);
 
@@ -42,7 +44,3 @@ intents.onDefault([
     }
 ])
 
-function ensureProfile(session)
-{
-
-}
