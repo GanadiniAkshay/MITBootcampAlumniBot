@@ -30,12 +30,7 @@ var intents = new builder.IntentDialog();
 bot.dialog('/',intents);
 
 intents.matches(/^facebook/i,[
-    function (session,args) {
-        name = session.message.user.name.split(" ");
-        session.userData.firstName = name[0];
-        session.userData.lastName  = name[1];
-        session.send('Hi, %s',session.userData.firstName);
-    }
+    ensureName(session,next)
 ]);
 
 intents.onDefault([
@@ -44,3 +39,21 @@ intents.onDefault([
     }
 ]);
 
+
+function ensureName(session,next)
+{
+    if (!session.userData.firstName){
+        session.beginDialog('/ensureName');
+    }else{
+        next();
+    }
+}
+
+bot.dialog('/ensureName',[
+    function(session){
+        name = session.message.user.name.split(" ");
+        session.userData.firstName = name[0];
+        session.userData.lastName  = name[1];
+        session.endDialog();
+    }
+]);
