@@ -97,12 +97,13 @@ bot.dialog('/ensureEmail',[
             if (user)
             {
                 session.send('I see that you are from %s', user.cohort);
+                session.endDialog();
             }
             else
             {
                 session.send("Looks like you haven't attended the bootcamp");
+                session.endDialog();
             }
         });
-        session.endDialog();
     }
 ]);
