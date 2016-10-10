@@ -44,8 +44,16 @@ intents.matches(/^facebook/i,[
 ]);
 
 intents.onDefault([
+    function (session,args,next)
+    {
+        if (!session.userData.firstName){
+            session.beginDialog('/ensureName');
+        }else{
+            next();
+        }
+    },
     function (session){
-        session.send('Hi, user');
+        session.send('Hi, user %s',session.message.user.id);
     }
 ]);
 
