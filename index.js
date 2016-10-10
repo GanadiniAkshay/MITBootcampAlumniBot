@@ -1,6 +1,18 @@
 var builder = require('botbuilder');
 var restify = require('restify');
-var http    = require('http');
+var mongoose = require('mongoose');
+
+//==============================================
+// Database Setup
+//==============================================
+mongoose.connect(process.env.MONGO_URL);
+
+
+//===============================================
+// Database Models Setup
+//===============================================
+var User = require('./models/user');
+
 //==============================================
 // Bot Setup
 //==============================================
@@ -51,7 +63,15 @@ intents.onDefault([
         }
     },
     function (session){
-        session.send('Your email is %s', session.userData.email);
+        session.sendTyping();
+        User.findOne({'email':session.userData.email},function (err, user){
+            if (err)
+                return done(err);
+            if (user)
+                session.send('You are a bootcamper');
+            else
+                session.send('You are not a bootcamper');
+        });
     }
 ]);
 
