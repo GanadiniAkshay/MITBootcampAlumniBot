@@ -30,7 +30,14 @@ var intents = new builder.IntentDialog();
 bot.dialog('/',intents);
 
 intents.matches(/^facebook/i,[
-    ensureName(session,next)
+    function (session,next)
+    {
+        if (!session.userData.firstName){
+            session.beginDialog('/ensureName');
+        }else{
+            next();
+        }
+    }
 ]);
 
 intents.onDefault([
@@ -40,14 +47,6 @@ intents.onDefault([
 ]);
 
 
-function ensureName(session,next)
-{
-    if (!session.userData.firstName){
-        session.beginDialog('/ensureName');
-    }else{
-        next();
-    }
-}
 
 bot.dialog('/ensureName',[
     function(session){
