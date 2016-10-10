@@ -64,7 +64,7 @@ intents.onDefault([
     },
     function (session){
         session.sendTyping();
-        User.findOne({'email':session.userData.email},function (err, user){
+        User.findOne({'email':'akkulka@microsoft.com'},function (err, user){
             if (err)
                 return done(err);
             if (user)
