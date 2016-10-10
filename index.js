@@ -1,6 +1,6 @@
 var builder = require('botbuilder');
 var restify = require('restify');
-
+var http    = require('http');
 //==============================================
 // Bot Setup
 //==============================================
@@ -31,15 +31,7 @@ bot.dialog('/',intents);
 
 intents.matches(/^facebook/i,[
     function (session,args) {
-        FB.api(
-            '/1129794080449050',
-            'GET',
-            {},
-            function(response) {
-                // Insert your code here
-                console.log(response);
-            }
-        );
+        console.log(session.message.user.name);
         session.send('check console for message data');
     }
 ]);
@@ -49,3 +41,8 @@ intents.onDefault([
         session.send('Hi, user');
     }
 ])
+
+function ensureProfile(session)
+{
+
+}
