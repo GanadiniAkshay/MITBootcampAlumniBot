@@ -63,15 +63,7 @@ intents.onDefault([
         }
     },
     function (session){
-        session.sendTyping();
-        User.findOne({'email':'akkulka@microsoft.com'},function (err, user){
-            if (err)
-                return done(err);
-            if (user)
-                session.send('You are a bootcamper');
-            else
-                session.send('You are not a bootcamper');
-        });
+        session.send('Not sure I understood what you said. Can you ask again?');
     }
 ]);
 
@@ -90,7 +82,20 @@ bot.dialog('/ensureEmail',[
         builder.Prompts.text(session, "What's your email id?");
     },
     function (session,results){
+        session.sendTyping();
         session.userData.email = results.response;
+        User.findOne({'email':session.userData.email},function (err, user){
+            if (err)
+                return done(err);
+            if (user)
+            {
+                session.send('I see that you are from %s', user.cohort);
+            }
+            else
+            {
+                session.send("Looks like you haven't attended the bootcamp");
+            }
+        });
         session.endDialog();
     }
 ]);
