@@ -123,6 +123,8 @@ bot.dialog('/ensureEmail',[
                                 }]
                             }
                         });
+                    session.send(replyMessage);
+                    session.endDialog();
             }
         });
     }
