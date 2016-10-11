@@ -74,7 +74,7 @@ intents.matches('hello',[
     function (session){
         hello_texts = ["Hi %s","Hey %s","Hello %s"]
         text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
-        session.send(text,session.userData.name);
+        session.send(text,session.userData.firstName);
     }
 ]);
 
