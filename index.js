@@ -60,10 +60,6 @@ intents.onDefault([
         }
     },
     function (session,args,next){
-        session.send('Hi, %s',session.userData.firstName);
-        next();
-    },
-    function (session,args,next){
         if (!session.userData.email){
             session.beginDialog('/ensureEmail');
         } else{
@@ -103,9 +99,11 @@ intents.onDefault([
 
 bot.dialog('/ensureName',[
     function(session){
+        session.sendTyping();
         name = session.message.user.name.split(" ");
         session.userData.firstName = name[0];
         session.userData.lastName  = name[1];
+        session.send('Hi, %s',session.userData.firstName);
         session.endDialog();
     }
 ]);
