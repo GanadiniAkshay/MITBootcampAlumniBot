@@ -34,11 +34,17 @@ var bot = new builder.UniversalBot(connector);
 server.post('/api/messages',connector.listen());
 
 
+//====================================================
+// Setup LUIS
+//====================================================
+var model = "https://api.projectoxford.ai/luis/v1/application?id=46838f95-fb66-4c10-bb00-8b54fbbf82db&subscription-key=f44e86844076443285013c85ea3f9b3e&q=";
+var recognizer = new builder.LuisRecognizer(model);
+var intents = new builder.IntentDialog({recognizers:[recognizer]});
+
 //=====================================================
 // Bots Dialogs
 //=====================================================
 
-var intents = new builder.IntentDialog();
 bot.dialog('/',intents);
 
 intents.matches(/^delete/i,[
@@ -49,8 +55,31 @@ intents.matches(/^delete/i,[
     }
 ]);
 
+intents.matches('hello',[
+    function (session,args,next)
+    {
+        if (!session.userData.firstName){
+            session.beginDialog('/ensureName');
+        }else{
+            next();
+        }
+    },
+    function (session,args,next){
+        if (!session.userData.email){
+            session.beginDialog('/ensureEmail');
+        } else{
+            next();
+        }
+    },
+    function (session){
+        hello_texts = ["Hi %s","Hey %s","Hello %s"]
+        text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
+        session.send(text,session.userData.name);
+    }
+]);
 
-intents.onDefault([
+
+intents.matches('None',[
     function (session,args,next)
     {
         if (!session.userData.firstName){
@@ -110,6 +139,7 @@ bot.dialog('/ensureName',[
 
 bot.dialog('/ensureEmail',[
     function(session){
+        session.sendTyping();
         if (!session.userData.email)
             builder.Prompts.text(session, "What's your email id?");
         else    
