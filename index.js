@@ -49,6 +49,21 @@ intents.matches(/^delete/i,[
     }
 ]);
 
+intents.matches(/^yes attended bootcamp, you got it wrong/i,[
+    function (session){
+        session.send('Oops sorry :(');
+        session.send("But I couldn't find your email in the list of bootcampers");
+        session.send('Please fill this form to request access https://akshaykulkarni.typeform.com/to/RZq14y');
+    }
+]);
+
+intents.matches(/^not attended bootcamp/i,[
+    function (session){
+        session.send("In that case I am afraid I won't be able to answer about alumni");
+        session.send("But you can ask me about the bootcamp or disciplined entrepreneurship");
+    }
+]);
+
 intents.onDefault([
     function (session,args,next)
     {
@@ -112,12 +127,12 @@ bot.dialog('/ensureEmail',[
                                 quick_replies: [{
                                     content_type:"text",
                                     title:"Yes, I haven't",
-                                    payload:"yes"
+                                    payload:"not attended bootcamp"
                                 },            
                                 {
                                     content_type:"text",
                                     title:"No, I have",
-                                    payload:"no"
+                                    payload:"yes attended bootcamp, you got it wrong"
                                 }]
                             }
                         });
