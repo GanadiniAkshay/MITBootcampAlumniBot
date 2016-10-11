@@ -70,7 +70,7 @@ intents.onDefault([
         }
     },
     function (session){
-        session.send('Not sure I understood what you said. Can you ask again?');
+        session.send(session.message.text);
     }
 ]);
 
@@ -101,8 +101,28 @@ bot.dialog('/ensureEmail',[
             }
             else
             {
-                session.send("Looks like you haven't attended the bootcamp");
-                session.endDialog();
+                var replyMessage = new builder.Message(session)
+                                            .text("Testing");
+
+                    replyMessage.sourceEvent({ 
+                            facebook: { 
+                                quick_replies: [{
+                                    content_type:"text",
+                                    title:"Red",
+                                    payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+                                    image_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Button_Icon_Red.svg/300px-Button_Icon_Red.svg.png"
+                                },            
+                                {
+                                    content_type:"text",
+                                    title:"Blue",
+                                    payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE",
+                                    image_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Button_Icon_Blue.svg/768px-Button_Icon_Blue.svg.png"
+                                },
+                                {
+                                    content_type:"location"
+                                }]
+                            }
+                        });
             }
         });
     }
