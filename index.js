@@ -81,6 +81,12 @@ intents.onDefault([
                 session.send("In that case I am afraid I won't be able to answer about alumni");
                 session.send("But you can ask me about the bootcamp or disciplined entrepreneurship");
                 break;
+            case "correct bootcamp info":
+                session.send("So what do you want to know about?");
+                break;
+            case "wrong bootcamp info":
+                session.send("Sorry, but that's the info I got :|");
+                session.send("Fill this form to update info https://akshaykulkarni.typeform.com/to/RZq14y");
             default:
                 session.send(session.message.text);
         }
@@ -112,8 +118,24 @@ bot.dialog('/ensureEmail',[
                 return done(err);
             if (user)
             {
-                session.send('I see that you are from %s', user.cohort);
-                session.endDialog();
+                var replyMessage = new builder.Message(session)
+                                            .text('I see that you are from %s', user.cohort);
+
+                    replyMessage.sourceEvent({ 
+                            facebook: { 
+                                quick_replies: [{
+                                    content_type:"text",
+                                    title:"Yes, that's right :D",
+                                    payload:"correct bootcamp info"
+                                },            
+                                {
+                                    content_type:"text",
+                                    title:"Nope, not really :/",
+                                    payload:"wrong bootcamp info"
+                                }]
+                            }
+                        });
+                    session.send(replyMessage);
             }
             else
             {
