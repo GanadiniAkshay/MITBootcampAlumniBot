@@ -49,20 +49,6 @@ intents.matches(/^delete/i,[
     }
 ]);
 
-intents.matches(/^yes attended bootcamp, you got it wrong/i,[
-    function (session){
-        session.send('Oops sorry :(');
-        session.send("But I couldn't find your email in the list of bootcampers");
-        session.send('Please fill this form to request access https://akshaykulkarni.typeform.com/to/RZq14y');
-    }
-]);
-
-intents.matches(/^not attended bootcamp/i,[
-    function (session){
-        session.send("In that case I am afraid I won't be able to answer about alumni");
-        session.send("But you can ask me about the bootcamp or disciplined entrepreneurship");
-    }
-]);
 
 intents.onDefault([
     function (session,args,next)
@@ -85,7 +71,19 @@ intents.onDefault([
         }
     },
     function (session){
-        session.send(session.message.text);
+        switch (session.message.text){
+            case 'yes attended bootcamp, you got it wrong':
+                session.send('Oops sorry :(');
+                session.send("But I couldn't find your email in the list of bootcampers");
+                session.send('Please fill this form to request access https://akshaykulkarni.typeform.com/to/RZq14y');
+                break;
+            case "not attended bootcamp":
+                session.send("In that case I am afraid I won't be able to answer about alumni");
+                session.send("But you can ask me about the bootcamp or disciplined entrepreneurship");
+                break;
+            default:
+                session.send(session.message.text);
+        }
     }
 ]);
 
