@@ -87,8 +87,15 @@ intents.onDefault([
             case "wrong bootcamp info":
                 session.send("Sorry, but that's the info I got :|");
                 session.send("Fill this form to update info https://akshaykulkarni.typeform.com/to/RZq14y");
+                break;
             default:
-                session.send(session.message.text);
+                error_texts = [
+                                "Sorry, couldn't understand that :|",
+                                "Hmm not sure if I understdood that...can you rephrase your question?",
+                                "I didn't understand that :/",
+                                "Pardon me, but can you please rephrase?"
+                              ]
+                session.send(error_texts[Math.floor(Math.random() * error_texts.length)]);
         }
     }
 ]);
