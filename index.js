@@ -86,7 +86,10 @@ bot.dialog('/ensureName',[
 
 bot.dialog('/ensureEmail',[
     function(session){
-        builder.Prompts.text(session, "What's your email id?");
+        if (!session.userData.email)
+            builder.Prompts.text(session, "What's your email id?");
+        else    
+            session.endDialog();
     },
     function (session,results){
         session.sendTyping();
@@ -102,24 +105,19 @@ bot.dialog('/ensureEmail',[
             else
             {
                 var replyMessage = new builder.Message(session)
-                                            .text("Testing");
+                                            .text("I see that you haven't attended a bootcamp yet");
 
                     replyMessage.sourceEvent({ 
                             facebook: { 
                                 quick_replies: [{
                                     content_type:"text",
-                                    title:"Red",
-                                    payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
-                                    image_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Button_Icon_Red.svg/300px-Button_Icon_Red.svg.png"
+                                    title:"Yes, I haven't",
+                                    payload:"yes"
                                 },            
                                 {
                                     content_type:"text",
-                                    title:"Blue",
-                                    payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE",
-                                    image_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Button_Icon_Blue.svg/768px-Button_Icon_Blue.svg.png"
-                                },
-                                {
-                                    content_type:"location"
+                                    title:"No, I have",
+                                    payload:"no"
                                 }]
                             }
                         });
