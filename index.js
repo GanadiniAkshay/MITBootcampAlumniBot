@@ -170,10 +170,15 @@ intents.onDefault([
 
 bot.dialog('/verifyEmail',[
     function (session,args,next){
-        session.send("I will verify your email");
+        builder.Prompts.text("What's your email id used for the bootcamp?");
+    },
+    function(session,results)
+    {
+        email = results.response;
+        builder.Prompts.text("Pleas enter the one time password sent to your email for verification purposes");
         client.sendEmail({
             "From": "mail@akshaykulkarni.online", 
-            "To": "akshaykulkarni.2104@gmail.com", 
+            "To": email, 
             "Subject": "Test", 
             "TextBody": "Test Message"
         },function(error, success){
