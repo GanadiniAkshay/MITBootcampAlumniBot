@@ -59,11 +59,14 @@ intents.matches(/^delete/i,[
 
 intents.matches('hello',[
     function (session,args,next){
+        session.sendTyping();
         hello_texts = ["Hi %s","Hey %s","Hello %s"]
         text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
         session.send(text,session.userData.firstName);
 
          if (!session.userData.isBootcamper){
+            session.sendTyping();
+            session.privateConversationData.questionAsked = 'isBootcamper';
             session.send("I can give info about the bootcamp, disciplined entrepreneurship and information about alumni if you are a bootcamper from the previous classes");
             var replyMessage = new builder.Message(session)
                                             .text('Have you attended the MIT bootcamp prevously?');
@@ -89,14 +92,38 @@ intents.matches('hello',[
 
 intents.matches('positiveReply',[
     function (session){
-        session.send("That's a positiveReply");
+        if (session.privateConversationData.questionAsked)
+        {
+            switch (session.privateConversationData.questionAsked){
+                case 'isBootcamper':
+                    session.privateConversationData.questionAsked = "";
+                    session.beginDialog('/verifyEmail');
+                default:
+                    session.send("Sorry, something went wrong. What can I help you with?");
+            }
+
+        }else{
+            session.send("Sorry, something went wrong. What can I help you with?");
+        }
     }
 ]);
 
 
 intents.matches('negativeReply',[
     function (session){
-        session.send("That's a negativeReply");
+        if (session.privateConversationData.questionAsked)
+        {
+            switch (session.privateConversationData.questionAsked){
+                case 'isBootcamper':
+                    session.privateConversationData.questionAsked = "";
+                    session.send("That's okay I can answer questions about the bootcamp or disciplined entrepreneurship");
+                default:
+                    session.send("Sorry, something went wrong. What can I help you with?");
+            }
+
+        }else{
+            session.send("Sorry, something went wrong. What can I help you with?");
+        }
     }
 ]);
 
@@ -130,7 +157,12 @@ intents.onDefault([
 //=====================================================
 
 
-
+bot.dialog('/verifyEmail',[
+    function (session,args,next){
+        session.send("I will verify your email");
+        session.endDialog();
+    }
+]);
 
 
 
