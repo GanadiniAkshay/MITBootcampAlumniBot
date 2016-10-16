@@ -105,7 +105,7 @@ bot.dialog('/checkBootcamper',[
     function(session,args,next){
         session.sendTyping();
         if (!session.userData.isBootcamper){
-            builder.Prompts.choice(session, "Have you attended the bootcamp previously?", ["yes","no"]);
+            builder.Prompts.confirm(session, "Have you attended the bootcamp in the past?");
         }else{
             session.endDialog();
         }
