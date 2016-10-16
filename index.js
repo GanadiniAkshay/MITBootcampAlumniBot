@@ -110,7 +110,7 @@ bot.dialog('/checkBootcamper',[
             session.endDialog();
         }
     },
-    function(session,resutls){
+    function(session,results){
         session.send(results.response);
     }
 ]);
