@@ -97,8 +97,10 @@ intents.matches('positiveReply',[
                 case 'isBootcamper':
                     session.privateConversationData.questionAsked = "";
                     session.beginDialog('/verifyEmail');
+                    break;
                 default:
                     session.send("Sorry, something went wrong. What can I help you with?");
+                    break;
             }
 
         }else{
@@ -118,10 +120,12 @@ intents.matches('negativeReply',[
                     session.send("That's okay I can answer questions about the bootcamp or disciplined entrepreneurship");
                     break;
                 default:
-                    session.send("Sorry, something went wrong. What can I help you with llal?");
+                    session.send("Sorry, something went wrong. What can I help you with?");
                     break;
             }
 
+        }else{
+            session.send("Sorry, something went wrong. What can I help you with?");
         }
     }
 ]);
