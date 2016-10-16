@@ -58,17 +58,25 @@ intents.matches(/^delete/i,[
 ]);
 
 intents.matches('hello',[
+    function (session,args,next){
+        hello_texts = ["Hi %s","Hey %s","Hello %s"]
+        text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
+        session.send(text,session.userData.firstName);
+        next();
+    },
     function(session,args,next){
         if (!session.userData.isBootcamper){
+            session.send("I can give info about the bootcamp, disciplined entrepreneurship and information about alumni if you are a bootcamper from the previous classes");
             session.beginDialog('/checkBootcamper');
         }else{
             next();
         }
-    },
+    }
+]);
+
+intents.matches('positiveReply',[
     function (session){
-        hello_texts = ["Hi %s","Hey %s","Hello %s"]
-        text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
-        session.send(text,session.userData.firstName);
+        session.send("That's a positiveReply");
     }
 ]);
 
@@ -105,13 +113,27 @@ bot.dialog('/checkBootcamper',[
     function(session,args,next){
         session.sendTyping();
         if (!session.userData.isBootcamper){
-            builder.Prompts.confirm(session, "Have you attended the bootcamp in the past?");
+            var replyMessage = new builder.Message(session)
+                                            .text('Have you attended the bootcamp prevously?');
+
+                    replyMessage.sourceEvent({ 
+                            facebook: { 
+                                quick_replies: [{
+                                    content_type:"text",
+                                    title:"Yes I have",
+                                    payload:"yes"
+                                },            
+                                {
+                                    content_type:"text",
+                                    title:"Nope I haven't",
+                                    payload:"no"
+                                }]
+                            }
+                        });
+                    session.send(replyMessage);
         }else{
             session.endDialog();
         }
-    },
-    function(session,results){
-        session.send(results.response);
     }
 ]);
 
