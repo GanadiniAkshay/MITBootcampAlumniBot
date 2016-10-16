@@ -93,6 +93,13 @@ intents.matches('positiveReply',[
     }
 ]);
 
+
+intents.matches('negativeReply',[
+    function (session){
+        session.send("That's a negativeReply");
+    }
+]);
+
 intents.matches('None',[
     function(session,args,next){
         error_texts = [
