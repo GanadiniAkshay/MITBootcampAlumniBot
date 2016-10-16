@@ -105,24 +105,7 @@ bot.dialog('/checkBootcamper',[
     function(session,args,next){
         session.sendTyping();
         if (!session.userData.isBootcamper){
-            var replyMessage = new builder.Message(session)
-                                            .text('Have you attended the bootcamp previously?');
-
-                    replyMessage.sourceEvent({ 
-                            facebook: { 
-                                quick_replies: [{
-                                    content_type:"text",
-                                    title:"Yes I have",
-                                    payload:"yes"
-                                },            
-                                {
-                                    content_type:"text",
-                                    title:"No I haven't",
-                                    payload:"no"
-                                }]
-                            }
-                        });
-                    session.send(replyMessage);
+            builder.Prompts.choice(session, "Have you attended the bootcamp previously?", ["yes","no"]);
         }else{
             session.endDialog();
         }
