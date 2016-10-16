@@ -67,9 +67,8 @@ intents.matches('hello',[
          if (!session.userData.isBootcamper){
             session.sendTyping();
             session.privateConversationData.questionAsked = 'isBootcamper';
-            session.send("I can give info about the bootcamp, disciplined entrepreneurship and information about alumni if you are a bootcamper from the previous classes");
             var replyMessage = new builder.Message(session)
-                                            .text('Have you attended the MIT bootcamp prevously?');
+                                            .text('So have you attended the MIT bootcamp prevously?');
 
                     replyMessage.sourceEvent({ 
                             facebook: { 
@@ -117,8 +116,10 @@ intents.matches('negativeReply',[
                 case 'isBootcamper':
                     session.privateConversationData.questionAsked = "";
                     session.send("That's okay I can answer questions about the bootcamp or disciplined entrepreneurship");
+                    break;
                 default:
                     session.send("Sorry, something went wrong. What can I help you with?");
+                    break;
             }
 
         }else{
