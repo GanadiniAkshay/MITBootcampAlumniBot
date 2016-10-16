@@ -62,14 +62,10 @@ intents.matches('hello',[
         hello_texts = ["Hi %s","Hey %s","Hello %s"]
         text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
         session.send(text,session.userData.firstName);
-        next();
-    },
-    function(session,args,next){
-        if (!session.userData.isBootcamper){
+
+         if (!session.userData.isBootcamper){
             session.send("I can give info about the bootcamp, disciplined entrepreneurship and information about alumni if you are a bootcamper from the previous classes");
             session.beginDialog('/checkBootcamper');
-        }else{
-            next();
         }
     }
 ]);
@@ -114,7 +110,7 @@ bot.dialog('/checkBootcamper',[
         session.sendTyping();
         if (!session.userData.isBootcamper){
             var replyMessage = new builder.Message(session)
-                                            .text('Have you attended the bootcamp prevously?');
+                                            .text('Have you attended the MIT bootcamp prevously?');
 
                     replyMessage.sourceEvent({ 
                             facebook: { 
