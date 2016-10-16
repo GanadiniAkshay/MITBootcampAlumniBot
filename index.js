@@ -58,6 +58,13 @@ intents.matches(/^delete/i,[
 ]);
 
 intents.matches('hello',[
+    function(session,args,next){
+        if (!session.userData.isBootcamper){
+            session.beginDialog('/checkBootcamper');
+        }else{
+            next();
+        }
+    },
     function (session){
         hello_texts = ["Hi %s","Hey %s","Hello %s"]
         text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
@@ -88,6 +95,43 @@ intents.onDefault([
         session.send(error_texts[Math.floor(Math.random() * error_texts.length)]);
     }
 ]);
+
+
+//=====================================================
+// Supporting Bot Dialogs
+//=====================================================
+
+bot.dialog('/checkBootcamper',[
+    function(session,args,next){
+        session.sendTyping();
+        if (!session.userData.isBootcamper){
+            var replyMessage = new builder.Message(session)
+                                            .text('Have you attended the bootcamp previously?');
+
+                    replyMessage.sourceEvent({ 
+                            facebook: { 
+                                quick_replies: [{
+                                    content_type:"text",
+                                    title:"Yes I have",
+                                    payload:"yes"
+                                },            
+                                {
+                                    content_type:"text",
+                                    title:"No I haven't",
+                                    payload:"no"
+                                }]
+                            }
+                        });
+                    session.send(replyMessage);
+        }else{
+            session.endDialog();
+        }
+    },
+    function(session,resutls){
+        session.send(results.response);
+    }
+]);
+
 
 
 
