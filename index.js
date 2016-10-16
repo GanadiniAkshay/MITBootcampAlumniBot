@@ -65,7 +65,24 @@ intents.matches('hello',[
 
          if (!session.userData.isBootcamper){
             session.send("I can give info about the bootcamp, disciplined entrepreneurship and information about alumni if you are a bootcamper from the previous classes");
-            session.beginDialog('/checkBootcamper');
+            var replyMessage = new builder.Message(session)
+                                            .text('Have you attended the MIT bootcamp prevously?');
+
+                    replyMessage.sourceEvent({ 
+                            facebook: { 
+                                quick_replies: [{
+                                    content_type:"text",
+                                    title:"Yes I have",
+                                    payload:"yes"
+                                },            
+                                {
+                                    content_type:"text",
+                                    title:"Nope I haven't",
+                                    payload:"no"
+                                }]
+                            }
+                        });
+            session.send(replyMessage);
         }
     }
 ]);
@@ -105,33 +122,7 @@ intents.onDefault([
 // Supporting Bot Dialogs
 //=====================================================
 
-bot.dialog('/checkBootcamper',[
-    function(session,args,next){
-        session.sendTyping();
-        if (!session.userData.isBootcamper){
-            var replyMessage = new builder.Message(session)
-                                            .text('Have you attended the MIT bootcamp prevously?');
 
-                    replyMessage.sourceEvent({ 
-                            facebook: { 
-                                quick_replies: [{
-                                    content_type:"text",
-                                    title:"Yes I have",
-                                    payload:"yes"
-                                },            
-                                {
-                                    content_type:"text",
-                                    title:"Nope I haven't",
-                                    payload:"no"
-                                }]
-                            }
-                        });
-                    session.send(replyMessage);
-        }else{
-            session.endDialog();
-        }
-    }
-]);
 
 
 
