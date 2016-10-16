@@ -2,6 +2,8 @@ var builder = require('botbuilder');
 var restify = require('restify');
 var mongoose = require('mongoose');
 
+require('dotenv').config({silent: true})
+
 //==============================================
 // Database Setup
 //==============================================
