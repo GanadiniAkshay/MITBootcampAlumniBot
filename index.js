@@ -2,7 +2,15 @@ var builder = require('botbuilder');
 var restify = require('restify');
 var mongoose = require('mongoose');
 
+var postmark = require('postmark');
+
 require('dotenv').config({silent: true})
+
+//=============================================
+// Postmark email server Setup
+//=============================================
+var client = new postmark.Client(process.env.SERVER_KEY);
+
 
 //==============================================
 // Database Setup
@@ -163,6 +171,18 @@ intents.onDefault([
 bot.dialog('/verifyEmail',[
     function (session,args,next){
         session.send("I will verify your email");
+        client.sendEmail({
+            "From": "mail@akshaykulkarni.online", 
+            "To": "akshaykulkarni.2104@gmail.com", 
+            "Subject": "Test", 
+            "TextBody": "Test Message"
+        },function(error, success){
+            if(error) {
+                console.error("Unable to send via postmark: " + error.message);
+                return;
+            }
+            console.info("Sent to postmark for delivery")
+        });
         session.endDialog();
     }
 ]);
