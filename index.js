@@ -122,8 +122,6 @@ intents.matches('negativeReply',[
                     break;
             }
 
-        }else{
-            session.send("Sorry, something went wrong. What can I help you with?");
         }
     }
 ]);
