@@ -68,9 +68,12 @@ intents.matches(/^delete/i,[
 intents.matches('hello',[
     function (session,args,next){
         session.sendTyping();
+        if (!session.userData.firsName){
+            session.userData.firsName = session.message.user.name.split(" ")[0];
+        }
         hello_texts = ["Hi %s","Hey %s","Hello %s"]
         text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
-        session.send(text,session.message.user.name);
+        session.send(text,session.userData.firsName);
 
          if (!session.userData.isBootcamper){
             session.sendTyping();
@@ -187,7 +190,7 @@ bot.dialog('/verifyEmail',[
             }
             console.info("Sent to postmark for delivery")
         });
-        builder.Prompts.text("Please enter the one time password sent to your email");
+        builder.Prompts.text(session,"Please enter the one time password sent to your email");
     },
     function (session,results){
         session.endDialog();
