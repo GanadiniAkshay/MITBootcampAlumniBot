@@ -177,7 +177,7 @@ bot.dialog('/verifyEmail',[
     },
     function (session,results){
         email = results.response;
-        User.findOne({'email':session.userData.email},function (err, user){
+        User.findOne({'email':email},function (err, user){
             if (err){
                 console.log(err);
                 session.send("Sorry, something went wrong. What can I help you with?");
