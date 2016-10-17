@@ -106,7 +106,9 @@ intents.matches('positiveReply',[
             switch (session.privateConversationData.questionAsked){
                 case 'isBootcamper':
                     session.privateConversationData.questionAsked = "";
-                    session.beginDialog('/verifyEmail');
+                    if (!session.userData.isBootcamper){
+                        session.beginDialog('/verifyEmail');
+                    }
                     break;
                 default:
                     session.send("Sorry, something went wrong. What can I help you with?");
