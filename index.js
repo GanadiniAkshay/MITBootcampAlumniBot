@@ -170,7 +170,22 @@ intents.onDefault([
 
 bot.dialog('/verifyEmail',[
     function(session){
-        session.send("What's your email?");
+        builder.Prompts.text(session,"What's your email?");
+    },
+    function (session,results){
+        client.sendEmail({
+            "From": "mail@akshaykulkarni.online", 
+            "To": "akshaykulkarni.2104@gmail.com", 
+            "Subject": "Test", 
+            "TextBody": "Test Message"
+        },function(error, success){
+            if(error) {
+                console.error("Unable to send via postmark: " + error.message);
+                return;
+            }
+            console.info("Sent to postmark for delivery")
+        });
+        session.endDialog();
     }
 ]);
 
