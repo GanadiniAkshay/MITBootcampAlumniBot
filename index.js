@@ -61,6 +61,7 @@ intents.matches(/^delete/i,[
     function (session){
         session.sendTyping();
         session.userData = {};
+        console.log(session.message);
         session.send('Profile Reset');
     }
 ]);
