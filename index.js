@@ -205,6 +205,7 @@ bot.dialog('/verifyEmail',[
                 session.send("But I couldn't find your email in the list of bootcampers");
                 session.send('Please fill this form to request access https://akshaykulkarni.typeform.com/to/RZq14y');
                 session.send("You can still ask me general stuff about the bootcamp or disciplined entrepreneurship");
+                session.endDialog();
             }
         });
     },
@@ -214,6 +215,7 @@ bot.dialog('/verifyEmail',[
             session.privateConversationData.otp = "";
             session.userData.isBootcamper = 'true';
             session.send("You can ask me questions about the alumni or general stuff about bootcamp or disciplined entrepreneurship");
+            session.endDialog();
         }else{
             builder.Prompts.text(session,"Sorry that's wrong, please enter the correct one time password");
         }
