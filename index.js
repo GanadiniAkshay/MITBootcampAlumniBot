@@ -61,7 +61,6 @@ intents.matches(/^delete/i,[
     function (session){
         session.sendTyping();
         session.userData = {};
-        console.log(session.message);
         session.send('Profile Reset');
     }
 ]);
@@ -71,7 +70,7 @@ intents.matches('hello',[
         session.sendTyping();
         hello_texts = ["Hi %s","Hey %s","Hello %s"]
         text = hello_texts[Math.floor(Math.random()*hello_texts.length)];
-        session.send(text,session.userData.firstName);
+        session.send(text,session.message.user.name);
 
          if (!session.userData.isBootcamper){
             session.sendTyping();
@@ -174,11 +173,13 @@ bot.dialog('/verifyEmail',[
         builder.Prompts.text(session,"What's your email?");
     },
     function (session,results){
+        email = results.response;
+        otp = Math.floor(Math.random()*900000) + 100000;
         client.sendEmail({
             "From": "mail@akshaykulkarni.online", 
-            "To": "akshaykulkarni.2104@gmail.com", 
+            "To": email, 
             "Subject": "Test", 
-            "TextBody": "Test Message"
+            "TextBody": "Your One Time Password is " + otp
         },function(error, success){
             if(error) {
                 console.error("Unable to send via postmark: " + error.message);
@@ -186,6 +187,9 @@ bot.dialog('/verifyEmail',[
             }
             console.info("Sent to postmark for delivery")
         });
+        builder.Prompts.text("Please enter the one time password sent to your email");
+    },
+    function (session,results){
         session.endDialog();
     }
 ]);
