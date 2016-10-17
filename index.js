@@ -170,7 +170,7 @@ intents.onDefault([
 
 bot.dialog('/verifyEmail',[
     function(session){
-        builder.Prompts.text("What's your email?");
+        session.send("What's your email?");
     }
 ]);
 
