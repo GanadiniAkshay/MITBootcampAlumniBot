@@ -169,8 +169,10 @@ intents.onDefault([
 
 
 bot.dialog('/verifyEmail',[
-    function (session,args,next){
-        session.send("I will verify your email");
+    function(session){
+        builder.Prompts.text("What's your email?");
+    },
+    function (session,results){
         client.sendEmail({
             "From": "mail@akshaykulkarni.online", 
             "To": "akshaykulkarni.2104@gmail.com", 
