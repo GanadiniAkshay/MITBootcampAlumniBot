@@ -178,10 +178,11 @@ bot.dialog('/verifyEmail',[
     function (session,results){
         email = results.response;
         otp = Math.floor(Math.random()*900000) + 100000;
+        session.privateConversationData.otp = otp;
         client.sendEmail({
             "From": "mail@akshaykulkarni.online", 
             "To": email, 
-            "Subject": "Test", 
+            "Subject": "MIT Bootcamp - One Time Password", 
             "TextBody": "Your One Time Password is " + otp
         },function(error, success){
             if(error) {
@@ -193,6 +194,18 @@ bot.dialog('/verifyEmail',[
         builder.Prompts.text(session,"Please enter the one time password sent to your email");
     },
     function (session,results){
+        otp = results.response;
+        if (otp == session.privateConversationData.otp){
+            session.send("verified");
+        }else{
+            builder.Prompts.text(session,"Sorry that's wrong, please enter the correct one time password");
+        }
+    },
+    function(session, results){
+        otp = results.response;
+        if (otp == session.privateConversationData.otp){
+            session.send("verified");
+        }
         session.endDialog();
     }
 ]);
