@@ -99,6 +99,14 @@ intents.matches('hello',[
     }
 ]);
 
+intents.matches('whatIsBootcamp',[
+    function (session){
+        session.sendTyping();
+        text = "The MIT Global Entrepreneurship Bootcamp is an intensive, week-long new ventures leadership program that gives bootcampers a taste of drinking from the firehose that all MIT students experience. It is a nexus connecting entrepreneurs from around the world to the entrepreneurship and         innovation eco-system surrounding the Massachusetts Institute of Technology";
+        session.send(text);
+    }
+]);
+
 intents.matches('positiveReply',[
     function (session){
         if (session.privateConversationData.questionAsked)
