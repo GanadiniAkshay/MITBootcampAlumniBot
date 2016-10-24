@@ -335,10 +335,30 @@ bot.dialog('/searchBySkills',[
     function (session,results){
         session.send('Searching for bootcampers with those skills....')
         session.sendTyping();
+        unneccessary = ['someone','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl'];
+        profession_map = {
+            "programmer" : 'programming',
+            "programs"   : 'programming',
+            "developer"  : 'programming',
+            "develops"   : 'programming',
+            "coder"      : 'programming',
+            "codes"      : 'programming',
+            "paints"     : 'painting',
+            "painter"    : 'painting',
+            "photographer" : 'photography',
+            "videographer" : 'videography',
+            "seller"       : 'selling',
+            "teacher"      : 'teaching'
+        };
         skills = results.response.split(' ');
-        for(i=0;i<skills.length;i++)
-        {
-            session.send('searching for ' + skills[i]);
+        for(i=0;i<skills.length;i++) {
+            if (unneccessary.indexOf(skills[i]) != -1) {
+                if (skills[i] in profession_map){
+                    session.send('searching for ' + profession_map[skills[i]]);
+                } else{
+                    session.send('searching for ' + skills[i]);
+                }
+            }
         }
     }
 ]);
