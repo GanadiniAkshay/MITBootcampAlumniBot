@@ -367,9 +367,10 @@ bot.dialog('/searchBySkills',[
                 }
             }
         }
+        console.log(bootcampers);
         session.privateConversationData.bootcampers = bootcampers;
-        for (j=0;j<session.privateConversationData.bootcampers.length;j++){
-            session.send(session.privateConversationData.bootcampers[j]["name"]);
+        for (j=0;j<bootcampers.length;j++){
+            session.send(bootcampers[j]["name"]);
         }
         session.endDialog();
     }
