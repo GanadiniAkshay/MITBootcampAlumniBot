@@ -157,7 +157,6 @@ intents.matches('whatAlumni',[
                     ])
             ]);
         builder.Prompts.choice(session, msg, "select:100|select:101|select:102|select:103");
-        builder.Prompts.text();
     },
     function (session, results) {
         var action, item;
