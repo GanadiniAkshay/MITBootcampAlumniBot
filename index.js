@@ -110,6 +110,13 @@ intents.matches('whatIsBootcamp',[
     }
 ]);
 
+intents.matches('whatAlumni',[
+    function (session){
+        session.sendTyping();
+        session.send("Here's somethings you can ask");
+    }
+]);
+
 intents.matches('positiveReply',[
     function (session){
         if (session.privateConversationData.questionAsked)
