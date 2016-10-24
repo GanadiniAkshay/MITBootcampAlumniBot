@@ -341,6 +341,8 @@ bot.dialog('/searchBySkills',[
             "programs"   : 'programming',
             "developer"  : 'programming',
             "develops"   : 'programming',
+            "code"       : 'programming',
+            "coding"     : 'programming',
             "coder"      : 'programming',
             "codes"      : 'programming',
             "paints"     : 'painting',
