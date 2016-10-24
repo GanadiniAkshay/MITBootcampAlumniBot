@@ -331,7 +331,15 @@ bot.dialog('/searchByName',[
 
 bot.dialog('/searchBySkills',[
     function (session,args,next){
-        session.send("Searching by Skills");
+        builder.Prompts.text("What skills are you looking for?");
+    },
+    function (session,results){
+        session.send("Searching for bootcampers with those skills...");
+        session.sendTyping();
+        skills = session.response.split(' ');
+        for (i=0;i<skills.length;i++){
+            session.send("Searching for %s",skills[i]);
+        }
     }
 ]);
 
