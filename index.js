@@ -360,6 +360,7 @@ bot.dialog('/searchBySkills',[
                 }
             }
         }
+        session.endDialog();
     }
 ]);
 
