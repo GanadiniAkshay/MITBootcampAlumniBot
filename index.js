@@ -331,7 +331,7 @@ bot.dialog('/searchByName',[
 
 bot.dialog('/searchBySkills',[
     function (session,args,next){
-        builder.Prompts.text("What skills are you looking for?");
+        builder.Prompts.text(session,"What skills are you looking for?");
     },
     function (session,results){
         session.send("Searching for bootcampers with those skills...");
