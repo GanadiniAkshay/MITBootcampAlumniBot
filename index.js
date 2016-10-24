@@ -333,7 +333,7 @@ bot.dialog('/searchBySkills',[
     function (session){
         builder.Prompts.text(session,"What skills are you looking for?");
     },
-    function (session,results){
+    function (session,results,next){
         session.send('Searching for bootcampers with those skills....')
         session.sendTyping();
         unneccessary = ['someone','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can'];
@@ -353,28 +353,33 @@ bot.dialog('/searchBySkills',[
             "seller"       : 'selling',
             "teacher"      : 'teaching'
         };
-        bootcampers = [];
+        session.privateConversationData.bootcampers = [];
         skills = results.response.split(' ');
         for(i=0;i<skills.length;i++) {
             if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
                     User.find({"skills":{ $in : [profession_map[skills[i]]]}},function(err,campers){
-                        bootcampers.concat(campers)
+                        session.privateConversationData.bootcampers.concat(campers)
+
+                        for (j=0;j<session.privateConversationData.bootcampers.length;j++){
+                            session.send(session.privateConversationData.bootcampers[j]["name"]);
+                        }
+
+                        session.endDialog();
                     });
                 }else{
                     campers = User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
-                        bootcampers.concat(campers);
+                        session.privateConversationData.bootcampers.concat(campers);
+
+                        for (j=0;j<session.privateConversationData.bootcampers.length;j++){
+                            session.send(session.privateConversationData.bootcampers[j]["name"]);
+                        }
+
+                        session.endDialog();
                     });
                 }
             }
         }
-        sleep.sleep(2);
-        console.log(bootcampers);
-        session.privateConversationData.bootcampers = bootcampers;
-        for (j=0;j<bootcampers.length;j++){
-            session.send(bootcampers[j]["name"]);
-        }
-        session.endDialog();
     }
 ]);
 
