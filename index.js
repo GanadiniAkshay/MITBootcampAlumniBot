@@ -358,19 +358,18 @@ bot.dialog('/searchBySkills',[
             if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
                     User.find({"skills":{ $in : [profession_map[skills[i]]]}},function(err,campers){
-                        for(j=0;j<campers.length;j++)
-                        {
-                            session.send(campers[j]["name"]);
-                        }
+                        bootcampers.append(campers)
                     });
                 }else{
                     campers = User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
-                        for(j=0;j<campers.length;j++){
-                            console.log(campers);
-                        }
+                        bootcampers.append(campers);
                     });
                 }
             }
+        }
+        session.privateConversationData.bootcampers = bootcampers;
+        for (j=0;j<session.privateConversationData.bootcampers.length;j++){
+            session.send(session.privateConversationData.bootcampers[j]["name"]);
         }
         session.endDialog();
     }
