@@ -395,12 +395,15 @@ bot.dialog('/searchBySkills',[
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
                                     .attachments(attachments)
 
-                        session.send(choices);
-                        session.endDialog();
+                        session.send("Here are a few people....");
+                        builder.Prompts.choice(session,msg,choices);
                     });
                 }
             }
         }
+    },
+    function(session, results){
+        session.send('choosed');
     }
 ]);
 
