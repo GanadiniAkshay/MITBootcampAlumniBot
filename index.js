@@ -335,7 +335,7 @@ bot.dialog('/searchBySkills',[
     function (session,results){
         session.send('Searching for bootcampers with those skills....')
         session.sendTyping();
-        unneccessary = ['someone','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl'];
+        unneccessary = ['someone','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can'];
         profession_map = {
             "programmer" : 'programming',
             "programs"   : 'programming',
@@ -352,13 +352,18 @@ bot.dialog('/searchBySkills',[
             "seller"       : 'selling',
             "teacher"      : 'teaching'
         };
+        bootcampers = [];
         skills = results.response.split(' ');
         for(i=0;i<skills.length;i++) {
             if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
-                    session.send('searching for ' + profession_map[skills[i]]);
+                    campers = User.find({"skills":{ $in : [profession_map[skills[i]]]}});
+                    session.send('someone found');
+                    console.log(campers);
                 }else{
-                    session.send('searching for ' + skills[i]);
+                    campers = User.find({"skills":{ $in :[skills[i]]}});
+                    session.send('someone found');
+                    console.log(campers);
                 }
             }
         }
