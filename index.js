@@ -352,7 +352,7 @@ bot.dialog('/searchBySkills',[
         };
         skills = results.response.split(' ');
         for(i=0;i<skills.length;i++) {
-            if (unneccessary.indexOf(skills[i]) != -1) {
+            if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
                     session.send('searching for ' + profession_map[skills[i]]);
                 }
