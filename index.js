@@ -180,7 +180,6 @@ intents.matches('whatAlumni',[
                 session.beginDialog('/searchByLanguage');
                 break;
         }
-        session.endDialog();
     }  
 ]);
 
