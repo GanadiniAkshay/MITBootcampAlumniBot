@@ -368,13 +368,13 @@ bot.dialog('/searchBySkills',[
                                     builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
                             choices = choices + campers[j]['email'] + '|';
-                            session.send(choices);
+                            //session.send(choices);
                         }
                         var msg = new builder.Message(session)
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
                                     .attachments(attachments)
 
-                        //session.send(choices);
+                        session.send(choices);
                         session.endDialog();
                     });
                 }else{
@@ -389,13 +389,13 @@ bot.dialog('/searchBySkills',[
                                     builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
                             choices = choices + campers[j]['email'] + '|';
-                            session.send(choices);
+                            //session.send(choices);
                         }
                         var msg = new builder.Message(session)
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
                                     .attachments(attachments)
 
-                        //session.send(choices);
+                        session.send(choices);
                         session.endDialog();
                     });
                 }
