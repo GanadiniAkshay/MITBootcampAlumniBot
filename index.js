@@ -1,6 +1,7 @@
 var builder = require('botbuilder');
 var restify = require('restify');
 var mongoose = require('mongoose');
+var sleep   = require('sleep');
 
 var postmark = require('postmark');
 
@@ -113,14 +114,14 @@ intents.matches('whatIsBootcamp',[
 intents.matches('whatAlumni',[
     function (session){
         session.sendTyping();
-        session.send("You can pass a custom message to Prompts.choice() that will present the user with a carousel of cards to select from. Each card can even support multiple actions.");
+        session.send("Here are somethings you can ask");
         
         // Ask the user to select an item from a carousel.
         var msg = new builder.Message(session)
             .attachmentLayout(builder.AttachmentLayout.carousel)
             .attachments([
                 new builder.HeroCard(session)
-                    .title("Search by Name")
+                    .title("Search Bootcampers by Name")
                     .subtitle("You can search the alumni by name")
                     .images([
                         builder.CardImage.create(session, "https://i.ytimg.com/vi/4EZ-fg1UIaQ/maxresdefault.jpg")
@@ -129,7 +130,7 @@ intents.matches('whatAlumni',[
                         builder.CardAction.imBack(session, "select:100", "Search by Name")
                     ]),
                 new builder.HeroCard(session)
-                    .title("Search by Skills")
+                    .title("Search Bootcampers by Skills")
                     .subtitle("You can search the alumni by skills")
                     .images([
                         builder.CardImage.create(session, "https://cdn.elegantthemes.com/blog/wp-content/uploads/2015/11/Essential-Skills-Top-10-shutterstock_285431867.png")
@@ -138,7 +139,7 @@ intents.matches('whatAlumni',[
                         builder.CardAction.imBack(session, "select:101", "Search by Skills")
                     ]),
                 new builder.HeroCard(session)
-                    .title("Search by Location")
+                    .title("Search Bootcampers by Location")
                     .subtitle("You can search the alumni by location")
                     .images([
                         builder.CardImage.create(session, "http://i.huffpost.com/gen/1378629/images/o-LOCATION-MAP-facebook.jpg")
@@ -147,7 +148,7 @@ intents.matches('whatAlumni',[
                         builder.CardAction.imBack(session, "select:102", "Search by Location")
                     ]),
                 new builder.HeroCard(session)
-                    .title("Search by Language")
+                    .title("Search Bootcampers by Language")
                     .subtitle("You can search the alumni by language they speak")
                     .images([
                         builder.CardImage.create(session, "http://rightbrainrevival.com/wp-content/uploads/2016/06/Learning-a-language-with-Zen.png")
@@ -367,6 +368,7 @@ bot.dialog('/searchBySkills',[
                 }
             }
         }
+        sleep.sleep(2);
         console.log(bootcampers);
         session.privateConversationData.bootcampers = bootcampers;
         for (j=0;j<bootcampers.length;j++){
