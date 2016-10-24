@@ -367,7 +367,7 @@ bot.dialog('/searchBySkills',[
                                 .buttons([
                                     builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
-                            choices = campers[j]['email'] + '|';
+                            choices = choices + campers[j]['email'] + '|';
                             session.send(choices);
                         }
                         var msg = new builder.Message(session)
@@ -388,7 +388,7 @@ bot.dialog('/searchBySkills',[
                                 .buttons([
                                     builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
-                            choices = campers[j]['email'] + '|';
+                            choices = choices + campers[j]['email'] + '|';
                             session.send(choices);
                         }
                         var msg = new builder.Message(session)
