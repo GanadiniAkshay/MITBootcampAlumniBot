@@ -123,7 +123,7 @@ intents.matches('whatAlumni',[
                     .title("Search by Name")
                     .subtitle("You can search the alumni by name")
                     .images([
-                        builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
+                        builder.CardImage.create(session, "https://i.ytimg.com/vi/4EZ-fg1UIaQ/maxresdefault.jpg")
                     ])
                     .buttons([
                         builder.CardAction.imBack(session, "select:100", "Search by Name")
@@ -132,8 +132,7 @@ intents.matches('whatAlumni',[
                     .title("Search by Skills")
                     .subtitle("You can search the alumni by skills")
                     .images([
-                        builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/320px-PikePlaceMarket.jpg")
-                            .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/800px-PikePlaceMarket.jpg")),
+                        builder.CardImage.create(session, "https://cdn.elegantthemes.com/blog/wp-content/uploads/2015/11/Essential-Skills-Top-10-shutterstock_285431867.png")
                     ])
                     .buttons([
                         builder.CardAction.imBack(session, "select:101", "Search by Skills")
@@ -142,8 +141,7 @@ intents.matches('whatAlumni',[
                     .title("Search by Location")
                     .subtitle("You can search the alumni by location")
                     .images([
-                        builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/320px-Night_Exterior_EMP.jpg")
-                            .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
+                        builder.CardImage.create(session, "http://i.huffpost.com/gen/1378629/images/o-LOCATION-MAP-facebook.jpg")
                     ])
                     .buttons([
                         builder.CardAction.imBack(session, "select:102", "Search by Location")
@@ -152,8 +150,7 @@ intents.matches('whatAlumni',[
                     .title("Search by Language")
                     .subtitle("You can search the alumni by language they speak")
                     .images([
-                        builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/320px-Night_Exterior_EMP.jpg")
-                            .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
+                        builder.CardImage.create(session, "http://rightbrainrevival.com/wp-content/uploads/2016/06/Learning-a-language-with-Zen.png")
                     ])
                     .buttons([
                         builder.CardAction.imBack(session, "select:103", "Search by Language")
