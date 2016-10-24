@@ -365,12 +365,12 @@ bot.dialog('/searchBySkills',[
                             attachments.push(new builder.HeroCard(session)
                                 .title(camper["name"])
                                 .buttons([
-                                    builder.CardAction.imBack(session, camper["email"], "More")
+                                    builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
                             if (j=campers.length-1){
-                                choices += camper["email"];
+                                choices += campers[j]["email"];
                             }
-                            choices += camper["email"] + '|';
+                            choices += campers[j]["email"] + '|';
                         }
                         var msg = new builder.Message(session)
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -382,10 +382,24 @@ bot.dialog('/searchBySkills',[
                 }else{
                     User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
                         session.privateConversationData.bootcampers = campers;
+                        attachments = [];
+                        choices = "";
                         for (j=0;j<campers.length;j++){
-                            session.send(campers[j]["name"]);
+                            attachments.push(new builder.HeroCard(session)
+                                .title(camper["name"])
+                                .buttons([
+                                    builder.CardAction.imBack(session, campers[j]["email"], "More")
+                                ]));
+                            if (j=campers.length-1){
+                                choices += campers[j]["email"];
+                            }
+                            choices += campers[j]["email"] + '|';
                         }
+                        var msg = new builder.Message(session)
+                                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                                    .attachments(attachments)
 
+                        session.send(choices);
                         session.endDialog();
                     });
                 }
