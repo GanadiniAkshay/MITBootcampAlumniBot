@@ -363,7 +363,7 @@ bot.dialog('/searchBySkills',[
                         choices = "";
                         for (j=0;j<campers.length;j++){
                             attachments.push(new builder.HeroCard(session)
-                                .title(camper["name"])
+                                .title(campers[j]["name"])
                                 .buttons([
                                     builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
