@@ -168,19 +168,19 @@ intents.matches('whatAlumni',[
         }
         switch (kvPair[1]) {
             case '100':
-                item = "Search by Name";
+                session.beginDialog('/searchByName');
                 break;
             case '101':
-                item = "Search by Skills";
+                session.beginDialog('/searchBySkills');
                 break;
             case '102':
-                item = "Search by Location";
+                session.beginDialog('/searchByLocation');
                 break;
             case '103':
-                item = "Search by Language";
+                session.beginDialog('/searchByLanguage');
                 break;
         }
-        session.endDialog('You %s "%s"', action, item);
+        session.endDialog();
     }  
 ]);
 
@@ -321,5 +321,30 @@ bot.dialog('/verifyEmail',[
     }
 ]);
 
+
+
+bot.dialog('/searchByName',[
+    function (session,args,next){
+        session.send("Searching by Name");
+    }
+]);
+
+bot.dialog('/searchBySkills',[
+    function (session,args,next){
+        session.send("Searching by Skills");
+    }
+]);
+
+bot.dialog('/searchByLanguage',[
+    function (session,args,next){
+        session.send("Searching by Language spoken");
+    }
+]);
+
+bot.dialog('/searchByLocation',[
+    function (session,args,next){
+        session.send("Searching by Location");
+    }
+]);
 
 
