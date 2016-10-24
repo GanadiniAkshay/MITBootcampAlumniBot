@@ -154,7 +154,28 @@ intents.matches('whatAlumni',[
                     ])
             ]);
         builder.Prompts.choice(session, msg, "select:100|select:101|select:102");
-    }
+    },
+    function (session, results) {
+        var action, item;
+        var kvPair = results.response.entity.split(':');
+        switch (kvPair[0]) {
+            case 'select':
+                action = 'selected';
+                break;
+        }
+        switch (kvPair[1]) {
+            case '100':
+                item = "the Space Needle";
+                break;
+            case '101':
+                item = "Pikes Place Market";
+                break;
+            case '102':
+                item = "the EMP Museum";
+                break;
+        }
+        session.endDialog('You %s "%s"', action, item);
+    }  
 ]);
 
 intents.matches('positiveReply',[
