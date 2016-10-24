@@ -324,22 +324,18 @@ bot.dialog('/verifyEmail',[
 
 
 bot.dialog('/searchByName',[
-    function (session,args,next){
+    function (session){
         session.send("Searching by Name");
     }
 ]);
 
 bot.dialog('/searchBySkills',[
-    function (session,args,next){
+    function (session){
         builder.Prompts.text(session,"What skills are you looking for?");
     },
     function (session,results){
-        session.send("Searching for bootcampers with those skills...");
-        session.sendTyping();
-        skills = session.response.split(' ');
-        for (i=0;i<skills.length;i++){
-            session.send("Searching for %s",skills[i]);
-        }
+        skills = results.response;
+        session.send('Search begins');
     }
 ]);
 
