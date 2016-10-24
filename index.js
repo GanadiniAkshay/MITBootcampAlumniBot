@@ -120,40 +120,47 @@ intents.matches('whatAlumni',[
             .attachmentLayout(builder.AttachmentLayout.carousel)
             .attachments([
                 new builder.HeroCard(session)
-                    .title("Space Needle")
-                    .subtitle("The Space Needle is an observation tower in Seattle, Washington, a landmark of the Pacific Northwest, and an icon of Seattle.")
+                    .title("Search by Name")
+                    .subtitle("You can search the alumni by name")
                     .images([
                         builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
                             .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/800px-Seattlenighttimequeenanne.jpg")),
                     ])
                     .buttons([
-                        builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Space_Needle", "Wikipedia"),
                         builder.CardAction.imBack(session, "select:100", "Select")
                     ]),
                 new builder.HeroCard(session)
-                    .title("Pikes Place Market")
-                    .subtitle("Pike Place Market is a public market overlooking the Elliott Bay waterfront in Seattle, Washington, United States.")
+                    .title("Search by Skills")
+                    .subtitle("You can search the alumni by skills")
                     .images([
                         builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/320px-PikePlaceMarket.jpg")
                             .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/800px-PikePlaceMarket.jpg")),
                     ])
                     .buttons([
-                        builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Pike_Place_Market", "Wikipedia"),
                         builder.CardAction.imBack(session, "select:101", "Select")
                     ]),
                 new builder.HeroCard(session)
-                    .title("EMP Museum")
-                    .subtitle("EMP Musem is a leading-edge nonprofit museum, dedicated to the ideas and risk-taking that fuel contemporary popular culture.")
+                    .title("Search by Location")
+                    .subtitle("You can search the alumni by location")
                     .images([
                         builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/320px-Night_Exterior_EMP.jpg")
                             .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
                     ])
                     .buttons([
-                        builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/EMP_Museum", "Wikipedia"),
                         builder.CardAction.imBack(session, "select:102", "Select")
+                    ]),
+                new builder.HeroCard(session)
+                    .title("Search by Language")
+                    .subtitle("You can search the alumni by language they speak")
+                    .images([
+                        builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/320px-Night_Exterior_EMP.jpg")
+                            .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
+                    ])
+                    .buttons([
+                        builder.CardAction.imBack(session, "select:103", "Select")
                     ])
             ]);
-        builder.Prompts.choice(session, msg, "select:100|select:101|select:102");
+        builder.Prompts.choice(session, msg, "select:100|select:101|select:102|select:103");
     },
     function (session, results) {
         var action, item;
@@ -165,13 +172,16 @@ intents.matches('whatAlumni',[
         }
         switch (kvPair[1]) {
             case '100':
-                item = "the Space Needle";
+                item = "Search by Name";
                 break;
             case '101':
-                item = "Pikes Place Market";
+                item = "Search by Skills";
                 break;
             case '102':
-                item = "the EMP Museum";
+                item = "Search by Location";
+                break;
+            case '103':
+                item = "Search by Language";
                 break;
         }
         session.endDialog('You %s "%s"', action, item);
