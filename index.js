@@ -369,8 +369,9 @@ bot.dialog('/searchBySkills',[
                                 ]));
                             if (j=campers.length-1){
                                 choices += campers[j]["email"];
+                            }else{
+                                choices += campers[j]["email"] + '|';
                             }
-                            choices += campers[j]["email"] + '|';
                         }
                         var msg = new builder.Message(session)
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
