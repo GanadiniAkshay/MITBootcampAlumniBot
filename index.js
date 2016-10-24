@@ -126,7 +126,7 @@ intents.matches('whatAlumni',[
                         builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
                     ])
                     .buttons([
-                        builder.CardAction.imBack(session, "select:100", "Select")
+                        builder.CardAction.imBack(session, "select:100", "Search by Name")
                     ]),
                 new builder.HeroCard(session)
                     .title("Search by Skills")
@@ -136,7 +136,7 @@ intents.matches('whatAlumni',[
                             .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/PikePlaceMarket.jpg/800px-PikePlaceMarket.jpg")),
                     ])
                     .buttons([
-                        builder.CardAction.imBack(session, "select:101", "Select")
+                        builder.CardAction.imBack(session, "select:101", "Search by Skills")
                     ]),
                 new builder.HeroCard(session)
                     .title("Search by Location")
@@ -146,7 +146,7 @@ intents.matches('whatAlumni',[
                             .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
                     ])
                     .buttons([
-                        builder.CardAction.imBack(session, "select:102", "Select")
+                        builder.CardAction.imBack(session, "select:102", "Search by Location")
                     ]),
                 new builder.HeroCard(session)
                     .title("Search by Language")
@@ -156,7 +156,7 @@ intents.matches('whatAlumni',[
                             .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Night_Exterior_EMP.jpg/800px-Night_Exterior_EMP.jpg"))
                     ])
                     .buttons([
-                        builder.CardAction.imBack(session, "select:103", "Select")
+                        builder.CardAction.imBack(session, "select:103", "Search by Language")
                     ])
             ]);
         builder.Prompts.choice(session, msg, "select:100|select:101|select:102|select:103");
