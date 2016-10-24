@@ -357,11 +357,13 @@ bot.dialog('/searchBySkills',[
         for(i=0;i<skills.length;i++) {
             if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
-                    campers = User.find({"skills":{ $in : [profession_map[skills[i]]]}});
-                    console.log(campers);
+                    User.find({"skills":{ $in : [profession_map[skills[i]]]}},function(err,campers){
+                        console.log(campers);
+                    });
                 }else{
-                    campers = User.find({"skills":{ $in :[skills[i]]}});
-                    console.log(campers)
+                    campers = User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
+                        console.log(campers);
+                    });
                 }
             }
         }
