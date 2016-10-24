@@ -358,11 +358,11 @@ bot.dialog('/searchBySkills',[
             if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
                     User.find({"skills":{ $in : [profession_map[skills[i]]]}},function(err,campers){
-                        bootcampers.append(campers)
+                        bootcampers.concat(campers)
                     });
                 }else{
                     campers = User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
-                        bootcampers.append(campers);
+                        bootcampers.concat(campers);
                     });
                 }
             }
