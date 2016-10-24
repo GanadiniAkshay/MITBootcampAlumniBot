@@ -353,20 +353,35 @@ bot.dialog('/searchBySkills',[
             "seller"       : 'selling',
             "teacher"      : 'teaching'
         };
-        session.privateConversationData.bootcampers = [];
         skills = results.response.split(' ');
         for(i=0;i<skills.length;i++) {
             if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
                     User.find({"skills":{ $in : [profession_map[skills[i]]]}},function(err,campers){
+                        session.privateConversationData.bootcampers = campers;
+                        attachments = [];
+                        choices = "";
                         for (j=0;j<campers.length;j++){
-                            session.send(campers[j]["name"]);
+                            attachments.push(new builder.HeroCard(session)
+                                .title(camper["name"])
+                                .buttons([
+                                    builder.CardAction.imBack(session, camper["email"], "More")
+                                ]));
+                            if (j=campers.length-1){
+                                choices += camper["email"];
+                            }
+                            choices += camper["email"] + '|';
                         }
+                        var msg = new builder.Message(session)
+                                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                                    .attachments(attachments)
 
+                        session.send(choices);
                         session.endDialog();
                     });
                 }else{
                     User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
+                        session.privateConversationData.bootcampers = campers;
                         for (j=0;j<campers.length;j++){
                             session.send(campers[j]["name"]);
                         }
