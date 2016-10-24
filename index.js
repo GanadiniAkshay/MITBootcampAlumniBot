@@ -124,7 +124,6 @@ intents.matches('whatAlumni',[
                     .subtitle("You can search the alumni by name")
                     .images([
                         builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
-                            .tap(builder.CardAction.showImage(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/800px-Seattlenighttimequeenanne.jpg")),
                     ])
                     .buttons([
                         builder.CardAction.imBack(session, "select:100", "Select")
