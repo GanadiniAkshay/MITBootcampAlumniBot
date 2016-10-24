@@ -336,7 +336,7 @@ bot.dialog('/searchBySkills',[
     function (session,results,next){
         session.send('Searching for bootcampers with those skills....')
         session.sendTyping();
-        unneccessary = ['someone','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can'];
+        unneccessary = ['someone','somebody','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can'];
         profession_map = {
             "programmer" : 'programming',
             "programs"   : 'programming',
@@ -367,11 +367,7 @@ bot.dialog('/searchBySkills',[
                                 .buttons([
                                     builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
-                            if (j=campers.length-1){
-                                session.send(campers[j]["email"]);
-                            }else{
-                                session.send(campers[j]["email"] + '|');
-                            }
+                            session.send(campers[j]["name"]);
                         }
                         var msg = new builder.Message(session)
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
@@ -391,11 +387,7 @@ bot.dialog('/searchBySkills',[
                                 .buttons([
                                     builder.CardAction.imBack(session, campers[j]["email"], "More")
                                 ]));
-                            if (j=campers.length-1){
-                                session.send(campers[j]["email"]);
-                            }else{
-                                session.send(campers[j]["email"] + '|');
-                            }
+                            session.send(campers[j]["name"]);
                         }
                         var msg = new builder.Message(session)
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
