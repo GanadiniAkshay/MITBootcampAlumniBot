@@ -358,12 +358,14 @@ bot.dialog('/searchBySkills',[
             if (unneccessary.indexOf(skills[i]) == -1) {
                 if (skills[i] in profession_map){
                     campers = User.find({"skills":{ $in : [profession_map[skills[i]]]}});
-                    session.send('someone found');
-                    console.log(campers);
+                    for (j=0;j<campers.length;j++){
+                        session.send(campers[j]["name"]);
+                    }
                 }else{
                     campers = User.find({"skills":{ $in :[skills[i]]}});
-                    session.send('someone found');
-                    console.log(campers);
+                    for (j=0;j<campers.length;j++){
+                        session.send(campers[j]["name"]);
+                    }
                 }
             }
         }
