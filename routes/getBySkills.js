@@ -44,7 +44,8 @@ module.exports = function (bot, builder, User){
                                         .subtitle("Lives in " + campers[j]['residence_country'] + '. You can mail him at ' + campers[j]['email'])
                                 )
                             }
-                            session.endDialog("something found");
+                            var msg = new builder.Message(session).attachements(attachements);
+                            session.endDialog(msg);
                         }
 
                         if (i==skills.length-1){
