@@ -6,4 +6,7 @@ module.exports = function (intents,builder){
     require('./intents/positiveReply.js')(intents,builder);
     require('./intents/negativeReply.js')(intents,builder);
     require('./intents/default.js')(intents,builder);
+    require('./intents/whatInResume.js')(intents,builder);
+    require('./intents/whyPitch.js')(intents,builder);
+    require('./intents/whatVisa.js')(intents,builder);
 }
