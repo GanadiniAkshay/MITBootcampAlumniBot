@@ -44,16 +44,14 @@ module.exports = function (bot, builder, User){
                                         .subtitle("Lives in " + campers[j]['residence_country'] + '. You can mail him at ' + campers[j]['email'])
                                 )
                             }
+                            session.endDialog("something found");
                         }
 
                         if (i==skills.length-1){
                             if (found == 0)
                             {
                                 session.endDialog("Nothing found");
-                            }else{
-                                session.endDialog("something found");
                             }
-                            
                         }
                     })
                 } 
