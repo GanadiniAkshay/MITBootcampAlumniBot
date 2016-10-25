@@ -36,37 +36,27 @@ module.exports = function (bot, builder, User){
                     User.find({"skills":{$in :[search_skill]}},function(err,campers){
                         if (campers.length > 0){
                             found = 1;
-                            session.send('here');
-                            next();
+                            attachements = [];
+                            for (j=0;j<campers.length;j++){
+                                attachements.push(
+                                    new builder.HeroCard(session)
+                                        .title(campers[j]['name'])
+                                        .subtitle("Lives in " + campers[j]['residence_country'] + '. You can mail him at ' + campers[j]['email'])
+                                )
+                            }
                         }
 
                         if (i==skills.length-1){
                             if (found == 0)
-                                session.send("Nothing found");
-                            session.endDialog();
+                            {
+                                session.endDialog("Nothing found");
+                            }else{
+                                session.endDialog("something found");
+                            }
+                            
                         }
                     })
-                }
-
-                
-            }
-        },
-        function(session, results){
-            session.endDialog();
-            var email = results.response.entity;
-            campers = session.privateConversationData.bootcampers;
-            for (i=0;i<campers.length;i++)
-            {
-                if (campers[i]["email"] == email){
-                    session.privateConversationData.camper = campers[i];
-                    var name = campers[i]["name"];
-                    var cohort = campers[i]["cohort"];
-                    var country = campers[i]["residence_country"];
-                    session.send("%s is from %s and lives in %s",name,cohort,country);
-                    session.send("You can mail him at %s",email);
-                    session.privateConversationData.campers = [];
-                    session.endDialog();
-                }
+                } 
             }
         }
     ]);
