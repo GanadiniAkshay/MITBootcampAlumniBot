@@ -7,7 +7,7 @@ var postmark = require('postmark');
 
 require('dotenv').config({silent: true})
 
-var getBySkills = require('getBySkills');
+var getBySkills = require('./getBySkills');
 
 //=============================================
 // Postmark email server Setup
