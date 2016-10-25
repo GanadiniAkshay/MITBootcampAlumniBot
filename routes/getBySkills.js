@@ -85,9 +85,18 @@ module.exports = function (bot, builder, User){
         function(session, results){
             var email = results.response.entity;
             campers = session.privateConversationData.bootcampers;
-            var camper = campers.filter(function(value){return value.email = email});
-            console.log(camper);
-            session.send(email);
+            for (i=0;i<campers.length;i++)
+            {
+                if (campers[i]["email"] == email){
+                    session.privateConversationData.camper = campers[i];
+                    var name = campers[i]["name"];
+                    var cohort = campers[i]["cohort"];
+                    var country = campers[i]["residence_country"];
+                    session.send("%s is from %s and lives in %s",name,cohort,country);
+                    session.privateConversationData.campers = [];
+                    session.endDialog();
+                }
+            }
             session.endDialog();
         }
     ]);
