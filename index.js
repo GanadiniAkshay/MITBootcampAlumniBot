@@ -404,6 +404,7 @@ bot.dialog('/searchBySkills',[
     },
     function(session, results){
         session.send('choosed');
+        session.endDialog();
     }
 ]);
 
