@@ -35,16 +35,19 @@ module.exports = function (bot, builder, User){
                     }
                     User.find({"skills":{$in :[search_skill]}},function(err,campers){
                         if (campers.length > 0){
+                            found = 1;
                             session.send('here');
+                        }
+
+                        if (i==skills.length-1){
+                            if (found == 0)
+                                session.send("Nothing found");
+                            session.endDialog();
                         }
                     })
                 }
 
-                if (i==skills.length-1){
-                    if (found == 0)
-                        session.send("Nothing found");
-                    session.endDialog();
-                }
+                
             }
         },
         function(session, results){
