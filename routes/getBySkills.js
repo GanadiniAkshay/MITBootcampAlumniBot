@@ -49,10 +49,7 @@ module.exports = function (bot, builder, User){
                         }
 
                         if (i==skills.length-1){
-                            if (found == 0)
-                            {
-                                session.endDialog("Couldn't find any bootcampers with those skills");
-                            }
+                            session.endDialog("Couldn't find any bootcampers with those skills");
                         }
                     })
                 } 
