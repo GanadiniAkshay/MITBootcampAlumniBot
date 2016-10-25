@@ -6,7 +6,7 @@ module.exports = function (bot, builder, User){
         function (session,results,next){
             session.send('Searching for bootcampers with those skills....')
             session.sendTyping();
-            unneccessary = ['anyone','anybody','does','did','someone','somebody','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can','do'];
+            unneccessary = ['write','anyone','anybody','does','did','someone','somebody','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can','do'];
             profession_map = {
                 "programmer" : 'programming',
                 "programs"   : 'programming',
@@ -49,7 +49,7 @@ module.exports = function (bot, builder, User){
                         }
 
                         else{
-                            if (i == skills.length -1)
+                            if (i == (skills.length-1))
                                 session.endDialog("Couldn't find any bootcampers with those skills");
                         }
                     })
