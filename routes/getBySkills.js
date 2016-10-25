@@ -97,6 +97,7 @@ module.exports = function (bot, builder, User){
                     session.endDialog();
                 }
             }
+            for (i=0;i<100000000;i++){};
             session.endDialog();
         }
     ]);
