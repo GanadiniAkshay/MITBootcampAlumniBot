@@ -33,7 +33,7 @@ module.exports = function (bot, builder, User){
                     } else{
                         search_skill = [skills[i]];
                     }
-                    User.find({"email":{$in :[search_skill]}},function(err,campers){
+                    User.find({"skills":{$in :[search_skill]}},function(err,campers){
                         if (campers.length > 0){
                             session.send('here');
                         }
