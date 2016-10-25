@@ -48,7 +48,7 @@ module.exports = function (bot, builder, User){
                             session.endDialog(msg);
                         }
 
-                        if (i==skills.length-1){
+                        else{
                             session.endDialog("Couldn't find any bootcampers with those skills");
                         }
                     })
