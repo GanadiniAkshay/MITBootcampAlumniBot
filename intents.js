@@ -9,5 +9,4 @@ module.exports = function (intents,builder){
     require('./intents/whatInResume.js')(intents,builder);
     require('./intents/whyPitch.js')(intents,builder);
     require('./intents/whatVisa.js')(intents,builder);
-    require('./intents/name.js')(intents,builder);
 }

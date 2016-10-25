@@ -26,8 +26,10 @@ module.exports = function (bot, builder, User){
             skills = results.response.split(' ');
             for(i=0;i<skills.length;i++) {
                 if (unneccessary.indexOf(skills[i]) == -1) {
+                    var search_skill = "";
                     if (skills[i] in profession_map){
-                        User.find({"skills":{ $in : [profession_map[skills[i]]]}},function(err,campers){
+                        search_skill = [profession_map[skills[i]]]
+                        User.find({"skills":{ $in : search_skill}},function(err,campers){
                             session.privateConversationData.bootcampers = campers;
                             attachments = [];
                             choices = "";
@@ -52,7 +54,8 @@ module.exports = function (bot, builder, User){
                             }
                         });
                     }else{
-                        User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
+                        search_skill = [skills[i]]
+                        User.find({"skills":{ $in : search_skill}},function(err,campers){
                             session.privateConversationData.bootcampers = campers;
                             attachments = [];
                             choices = "";
@@ -88,11 +91,11 @@ module.exports = function (bot, builder, User){
             for (i=0;i<campers.length;i++)
             {
                 if (campers[i]["email"] == email){
-                    session.privateConversationData.camper = campers[i];
                     var name = campers[i]["name"];
                     var cohort = campers[i]["cohort"];
                     var country = campers[i]["residence_country"];
                     session.send("%s is from %s and lives in %s",name,cohort,country);
+                    session.send("You can mail him at %s",email);
                     session.privateConversationData.campers = [];
                     session.endDialog();
                 }
