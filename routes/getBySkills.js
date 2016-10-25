@@ -34,6 +34,10 @@ module.exports = function (bot, builder, User){
                     }
                     User.find({"skills":{ $in : search_skill}},function(err,campers){
                         session.privateConversationData.bootcampers = campers;
+                        if (campers.length == 0){
+                            session.send("Sorry couldn't find anyone with those skills");
+                            session.endDialog();
+                        }
                         attachments = [];
                         choices = "";
                         for (j=0;j<campers.length;j++){
@@ -48,13 +52,9 @@ module.exports = function (bot, builder, User){
                         var msg = new builder.Message(session)
                                     .attachmentLayout(builder.AttachmentLayout.carousel)
                                     .attachments(attachments)
-                        if (attachments.length == 0){
-                            session.send("Sorry couldn't find anyone with those skills");
-                            session.endDialog();
-                        } else{
-                            session.send("Here are a few people....");
-                            builder.Prompts.choice(session,msg,choices);
-                        }
+                        session.send("Here are a few people....");
+                        builder.Prompts.choice(session,msg,choices);
+                        break;
                     });
                 }
             }
