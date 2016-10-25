@@ -59,23 +59,13 @@ var intents = new builder.IntentDialog({recognizers:[recognizer]});
 bot.dialog('/',intents);
 
 
-require('./intents/delete.js')(intents,builder);
-require('./intents/hello.js')(intents,builder);
-require('./intents/whatIsBootcamp.js')(intents,builder);
-require('./intents/whatAlumni.js')(intents,builder);
-require('./intents/positiveReply.js')(intents,builder);
-require('./intents/negativeReply.js')(intents,builder);
-require('./intents/default.js')(intents,builder);
+require('./intents.js')(intents,builder);
 
 
 //=====================================================
 // Supporting Bot Dialogs
 //=====================================================
-require('./routes/verifyEmail.js')(bot,builder,User,client);
-require('./routes/getByName.js')(bot,builder,User);
-require('./routes/getBySkills.js')(bot,builder,User);
-require('./routes/getByLocation.js')(bot,builder,User);
-require('./routes/getByLanguage.js')(bot,builder,User);
+require('./routes.js')(bot,builder,User,client);
 
 
 
