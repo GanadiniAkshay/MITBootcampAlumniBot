@@ -2,13 +2,11 @@ module.exports = function (bot, builder, User){
     bot.dialog('/searchBySkills',[
         function (session){
             builder.Prompts.text(session,"What skills are you looking for?");
-            session.endDialog();
         },
         function (session,results,next){
-            session.endDialog();
             session.send('Searching for bootcampers with those skills....')
             session.sendTyping();
-            unneccessary = ['someone','somebody','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can','do'];
+            unneccessary = ['anyone','anybody','does','did','someone','somebody','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can','do'];
             profession_map = {
                 "programmer" : 'programming',
                 "programs"   : 'programming',
@@ -26,6 +24,7 @@ module.exports = function (bot, builder, User){
                 "teacher"      : 'teaching'
             };
             skills = results.response.split(' ');
+            var found = 0;
             for(i=0;i<skills.length;i++) {
                 if (unneccessary.indexOf(skills[i]) == -1) {
                     var search_skill = "";
@@ -34,29 +33,12 @@ module.exports = function (bot, builder, User){
                     } else{
                         search_skill = [skills[i]];
                     }
-                    User.find({"skills":{ $in : search_skill}},function(err,campers){
-                        session.privateConversationData.bootcampers = campers;
-                        if (campers.length == 0){
-                            session.send("Sorry couldn't find anyone with those skills");
-                            session.endDialog();
-                        }
-                        attachments = [];
-                        choices = "";
-                        for (j=0;j<campers.length;j++){
-                            attachments.push(new builder.HeroCard(session)
-                                .title(campers[j]["name"])
-                                .buttons([
-                                    builder.CardAction.imBack(session, campers[j]["email"], "More")
-                                ]));
-                            choices = choices + campers[j]['email'] + '|';
-                            //session.send(choices);
-                        }
-                        var msg = new builder.Message(session)
-                                    .attachmentLayout(builder.AttachmentLayout.carousel)
-                                    .attachments(attachments)
-                        session.send("Here are a few people....");
-                        builder.Prompts.choice(session,msg,choices);
-                    });
+                }
+
+                if (i==skills.length-1){
+                    if (found == 0)
+                        session.send("Nothing found");
+                    session.endDialog();
                 }
             }
         },
