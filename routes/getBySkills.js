@@ -2,8 +2,10 @@ module.exports = function (bot, builder, User){
     bot.dialog('/searchBySkills',[
         function (session){
             builder.Prompts.text(session,"What skills are you looking for?");
+            session.endDialog();
         },
         function (session,results,next){
+            session.endDialog();
             session.send('Searching for bootcampers with those skills....')
             session.sendTyping();
             unneccessary = ['someone','somebody','who','is','the','an','a','and','&','like','maybe','in','good','at','better','best','person','man','woman','boy','girl','can','do'];
@@ -59,6 +61,7 @@ module.exports = function (bot, builder, User){
             }
         },
         function(session, results){
+            session.endDialog();
             var email = results.response.entity;
             campers = session.privateConversationData.bootcampers;
             for (i=0;i<campers.length;i++)
