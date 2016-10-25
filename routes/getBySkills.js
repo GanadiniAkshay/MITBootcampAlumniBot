@@ -35,7 +35,7 @@ module.exports = function (bot, builder, User){
                     }
                     User.find({"email":{$in :[search_skill]}},function(err,campers){
                         if (campers.length > 0){
-                            found = 1;
+                            next();
                         }
                     })
                 }
