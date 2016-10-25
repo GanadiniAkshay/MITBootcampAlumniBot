@@ -1,4 +1,4 @@
-module.exports = function (bot){
+module.exports = function (bot, builder, User){
     bot.dialog('/searchBySkills',[
         function (session){
             builder.Prompts.text(session,"What skills are you looking for?");

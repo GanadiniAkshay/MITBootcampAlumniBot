@@ -1,4 +1,4 @@
-module.exports = function (bot){
+module.exports = function (bot, builder, User){
     bot.dialog('/searchByName',[
         function (session){
             session.send("Searching by Name");

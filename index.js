@@ -325,10 +325,10 @@ bot.dialog('/verifyEmail',[
 
 
 
-require('./search_routes/getByName.js')(bot);
-require('./search_routes/getBySkills.js')(bot);
-require('./search_routes/getByLocation.js')(bot);
-require('./search_routes/getByLanguage.js')(bot);
+require('./search_routes/getByName.js')(bot,builder,User);
+require('./search_routes/getBySkills.js')(bot,builder,User);
+require('./search_routes/getByLocation.js')(bot,builder,User);
+require('./search_routes/getByLanguage.js')(bot,builder,User);
 
 
 
