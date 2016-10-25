@@ -85,7 +85,8 @@ module.exports = function (bot, builder, User){
         function(session, results){
             var email = results.response.entity;
             campers = session.privateConversationData.bootcampers;
-            console.log(campers);
+            var camper = campers.filter(function(value){return value.email = email});
+            console.log(camper);
             session.send(email);
             session.endDialog();
         }
