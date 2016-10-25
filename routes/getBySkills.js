@@ -96,9 +96,11 @@ module.exports = function (bot, builder, User){
                     session.privateConversationData.campers = [];
                     session.endDialog();
                 }
+
+                if (i==campers.length-1){
+                    session.endDialog();
+                }
             }
-            for (i=0;i<100000000;i++){};
-            session.endDialog();
         }
     ]);
 }
