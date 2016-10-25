@@ -36,15 +36,15 @@ module.exports = function (bot, builder, User){
                     User.find({"skills":{$in :[search_skill]}},function(err,campers){
                         if (campers.length > 0){
                             found = 1;
-                            attachements = [];
+                            attachments = [];
                             for (j=0;j<campers.length;j++){
-                                attachements.push(
+                                attachments.push(
                                     new builder.HeroCard(session)
                                         .title(campers[j]['name'])
                                         .subtitle("Lives in " + campers[j]['residence_country'] + '. You can mail him at ' + campers[j]['email'])
                                 )
                             }
-                            var msg = new builder.Message(session).attachements(attachements);
+                            var msg = new builder.Message(session).attachments(attachments);
                             session.endDialog(msg);
                         }
 
