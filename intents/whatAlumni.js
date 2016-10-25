@@ -9,15 +9,6 @@ module.exports = function (intents,builder){
             .attachmentLayout(builder.AttachmentLayout.carousel)
             .attachments([
                 new builder.HeroCard(session)
-                    .title("Search Bootcampers by Name")
-                    .subtitle("You can search the alumni by name")
-                    .images([
-                        builder.CardImage.create(session, "https://i.ytimg.com/vi/4EZ-fg1UIaQ/maxresdefault.jpg")
-                    ])
-                    .buttons([
-                        builder.CardAction.imBack(session, "select:100", "Search by Name")
-                    ]),
-                new builder.HeroCard(session)
                     .title("Search Bootcampers by Skills")
                     .subtitle("You can search the alumni by skills")
                     .images([
@@ -34,15 +25,6 @@ module.exports = function (intents,builder){
                     ])
                     .buttons([
                         builder.CardAction.imBack(session, "select:102", "Search by Location")
-                    ]),
-                new builder.HeroCard(session)
-                    .title("Search Bootcampers by Language")
-                    .subtitle("You can search the alumni by language they speak")
-                    .images([
-                        builder.CardImage.create(session, "http://rightbrainrevival.com/wp-content/uploads/2016/06/Learning-a-language-with-Zen.png")
-                    ])
-                    .buttons([
-                        builder.CardAction.imBack(session, "select:103", "Search by Language")
                     ])
             ]);
         builder.Prompts.choice(session, msg, "select:100|select:101|select:102|select:103");
