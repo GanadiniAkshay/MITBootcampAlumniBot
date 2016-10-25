@@ -1,4 +1,4 @@
-module.exports = function(bot,builder,User){
+module.exports = function(bot,builder,User,client){
     bot.dialog('/verifyEmail',[
     function(session){
         builder.Prompts.text(session,"What's your email?");
