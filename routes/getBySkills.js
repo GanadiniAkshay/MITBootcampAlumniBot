@@ -41,7 +41,7 @@ module.exports = function (bot, builder, User){
                                 attachments.push(
                                     new builder.HeroCard(session)
                                         .title(campers[j]['name'])
-                                        .subtitle("Lives in " + campers[j]['residence_country'] + '. You can mail him at ' + campers[j]['email'])
+                                        .subtitle("Lives in " + campers[j]['residence_country'] + '. email : ' + campers[j]['email'])
                                 )
                             }
                             var msg = new builder.Message(session).attachments(attachments);
@@ -51,7 +51,7 @@ module.exports = function (bot, builder, User){
                         if (i==skills.length-1){
                             if (found == 0)
                             {
-                                session.endDialog("Nothing found");
+                                session.endDialog("Couldn't find any bootcampers with those skills");
                             }
                         }
                     })
