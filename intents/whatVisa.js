@@ -8,6 +8,7 @@ module.exports = function (intents,builder){
         session.send(text1);
         text2 = "If you need a letter from MIT, we can provide admitted applicants with an invitation letter to come to the MIT Global Entrepreneurship Bootcamp if you email us your request at: mit15390@mit.edu.";
         session.send(text2);
+        session.sendTyping();
         text3 = "However, MIT cannot issue a student visa for international students coming for just one week.";
         session.send(text3);
     }
