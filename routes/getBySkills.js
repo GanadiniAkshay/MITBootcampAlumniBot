@@ -73,7 +73,8 @@ module.exports = function (bot, builder, User){
             }
         },
         function(session, results){
-            session.send('choosed');
+            var email = results.response.entity;
+            session.send(email);
             session.endDialog();
         }
     ]);
