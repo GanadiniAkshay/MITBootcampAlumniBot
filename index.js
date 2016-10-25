@@ -7,7 +7,7 @@ var postmark = require('postmark');
 
 require('dotenv').config({silent: true})
 
-var getBySkills = require('./getBySkills');
+
 
 //=============================================
 // Postmark email server Setup
@@ -409,6 +409,8 @@ bot.dialog('/searchBySkills',[
         session.endDialog();
     }
 ]);
+
+require('./getBySkills.js')(bot);
 
 bot.dialog('/searchByLocation',[
     function (session,args,next){
