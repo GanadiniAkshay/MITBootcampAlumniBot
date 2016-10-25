@@ -74,10 +74,6 @@ module.exports = function (bot, builder, User){
                     session.privateConversationData.campers = [];
                     session.endDialog();
                 }
-
-                if (i==campers.length-1){
-                    session.endDialog();
-                }
             }
         }
     ]);
