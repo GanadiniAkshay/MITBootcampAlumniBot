@@ -29,59 +29,33 @@ module.exports = function (bot, builder, User){
                     var search_skill = "";
                     if (skills[i] in profession_map){
                         search_skill = [profession_map[skills[i]]]
-                        User.find({"skills":{ $in : search_skill}},function(err,campers){
-                            session.privateConversationData.bootcampers = campers;
-                            attachments = [];
-                            choices = "";
-                            for (j=0;j<campers.length;j++){
-                                attachments.push(new builder.HeroCard(session)
-                                    .title(campers[j]["name"])
-                                    .buttons([
-                                        builder.CardAction.imBack(session, campers[j]["email"], "More")
-                                    ]));
-                                choices = choices + campers[j]['email'] + '|';
-                                //session.send(choices);
-                            }
-                            var msg = new builder.Message(session)
-                                        .attachmentLayout(builder.AttachmentLayout.carousel)
-                                        .attachments(attachments)
-                            if (attachments.length == 0){
-                                session.send("Sorry couldn't find anyone with those skills");
-                                session.endDialog();
-                            } else{
-                                session.send("Here are a few people....");
-                                builder.Prompts.choice(session,msg,choices);
-                            }
-                        });
-                    }else{
-                        search_skill = [skills[i]]
-                        User.find({"skills":{ $in : search_skill}},function(err,campers){
-                            session.privateConversationData.bootcampers = campers;
-                            attachments = [];
-                            choices = "";
-                            for (j=0;j<campers.length;j++){
-                                attachments.push(new builder.HeroCard(session)
-                                    .title(campers[j]["name"])
-                                    .buttons([
-                                        builder.CardAction.imBack(session, campers[j]["email"], "More")
-                                    ]));
-                                choices = choices + campers[j]['email'] + '|';
-                                //session.send(choices);
-                            }
-                            var msg = new builder.Message(session)
-                                        .attachmentLayout(builder.AttachmentLayout.carousel)
-                                        .attachments(attachments)
-
-                            if (attachments.length == 0){
-                                session.send("Sorry couldn't find anyone with those skills");
-                                session.endDialog();
-                            } else{
-                                session.sendTyping();
-                                session.send("Here are a few people....");
-                                builder.Prompts.choice(session,msg,choices);
-                            }
-                        });
+                    } else{
+                        search_skill = [skills[i]];
                     }
+                    User.find({"skills":{ $in : search_skill}},function(err,campers){
+                        session.privateConversationData.bootcampers = campers;
+                        attachments = [];
+                        choices = "";
+                        for (j=0;j<campers.length;j++){
+                            attachments.push(new builder.HeroCard(session)
+                                .title(campers[j]["name"])
+                                .buttons([
+                                    builder.CardAction.imBack(session, campers[j]["email"], "More")
+                                ]));
+                            choices = choices + campers[j]['email'] + '|';
+                            //session.send(choices);
+                        }
+                        var msg = new builder.Message(session)
+                                    .attachmentLayout(builder.AttachmentLayout.carousel)
+                                    .attachments(attachments)
+                        if (attachments.length == 0){
+                            session.send("Sorry couldn't find anyone with those skills");
+                            session.endDialog();
+                        } else{
+                            session.send("Here are a few people....");
+                            builder.Prompts.choice(session,msg,choices);
+                        }
+                    });
                 }
             }
         },
@@ -91,6 +65,7 @@ module.exports = function (bot, builder, User){
             for (i=0;i<campers.length;i++)
             {
                 if (campers[i]["email"] == email){
+                    session.privateConversationData.camper = campers[i];
                     var name = campers[i]["name"];
                     var cohort = campers[i]["cohort"];
                     var country = campers[i]["residence_country"];
