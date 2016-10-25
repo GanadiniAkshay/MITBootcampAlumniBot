@@ -54,7 +54,6 @@ module.exports = function (bot, builder, User){
                                     .attachments(attachments)
                         session.send("Here are a few people....");
                         builder.Prompts.choice(session,msg,choices);
-                        break;
                     });
                 }
             }
