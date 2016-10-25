@@ -37,6 +37,7 @@ module.exports = function (bot, builder, User){
                         if (campers.length > 0){
                             found = 1;
                             session.send('here');
+                            next();
                         }
 
                         if (i==skills.length-1){
