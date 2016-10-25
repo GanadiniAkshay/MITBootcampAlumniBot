@@ -43,9 +43,13 @@ module.exports = function (bot, builder, User){
                             var msg = new builder.Message(session)
                                         .attachmentLayout(builder.AttachmentLayout.carousel)
                                         .attachments(attachments)
-
-                            session.send("Here are a few people....");
-                            builder.Prompts.choice(session,msg,choices);
+                            if (attachments.length == 0){
+                                session.send("Sorry couldn't find anyone with those skills");
+                                session.endDialog();
+                            } else{
+                                session.send("Here are a few people....");
+                                builder.Prompts.choice(session,msg,choices);
+                            }
                         });
                     }else{
                         User.find({"skills":{ $in :[skills[i]]}},function(err,campers){
@@ -65,8 +69,14 @@ module.exports = function (bot, builder, User){
                                         .attachmentLayout(builder.AttachmentLayout.carousel)
                                         .attachments(attachments)
 
-                            session.send("Here are a few people....");
-                            builder.Prompts.choice(session,msg,choices);
+                            if (attachments.length == 0){
+                                session.send("Sorry couldn't find anyone with those skills");
+                                session.endDialog();
+                            } else{
+                                session.sendTyping();
+                                session.send("Here are a few people....");
+                                builder.Prompts.choice(session,msg,choices);
+                            }
                         });
                     }
                 }
