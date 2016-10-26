@@ -28,7 +28,25 @@ module.exports = function (intents,builder){
                     if (skill in profession_map){
                         skill = profession_map[skill]
                     }
-                    session.endDialog("skilled");
+                    User.find({"skills":{$in : [skill]}},function(err, campers){
+                        if (campers.length > 0){
+                            found = 1;
+                            attachments = [];
+                            for (j=0;j<campers.length;j++){
+                                attachments.push(
+                                    new builder.HeroCard(session)
+                                        .title(campers[j]['name'])
+                                        .subtitle(campers[j]["cohort"] + " Lives in " + campers[j]['residence_country'] + '. email : ' + campers[j]['email'])
+                                )
+                            }
+                            var msg = new builder.Message(session).attachments(attachments);
+                            session.endDialog(msg);
+                        }
+
+                        else{
+                                session.endDialog("Couldn't find any bootcampers with those skills");
+                        }
+                    });
                 }else{
                     session.endDialog("Sorry couldn't understand that");
                 }
