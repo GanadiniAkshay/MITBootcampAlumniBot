@@ -11,7 +11,7 @@ module.exports = function (intents,builder){
         }
         User.find({"residence_country":{$in : [location.entity]}},function(err, campers){
             console.log(campers);
-            session.send(found);
+            session.send('found');
         })
     }
  ]);
