@@ -1,6 +1,7 @@
 module.exports = function (intents,builder){
     intents.matches('getByLocation',[
     function (session,args,next){
+        session.send('paris');
         var User = require('../models/user');
         var location = builder.EntityRecognizer.findEntity(args.entities,'builtin.geography.country');
         if (!location){
@@ -9,10 +10,10 @@ module.exports = function (intents,builder){
                 session.send("Not sure I know what that place is. Try searching by country");
             }
         }
-        User.find({"residence_country":{$in : [location.entity]}},function(err, campers){
+        User.find({"email":"akshaykulkarni.2104@gmail.com"},function(err,campers){
             console.log(campers);
             session.send('found');
-        })
+        });
     }
  ]);
 }
