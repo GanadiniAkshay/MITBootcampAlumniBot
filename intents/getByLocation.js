@@ -1,7 +1,6 @@
 module.exports = function (intents,builder){
     intents.matches('getByLocation',[
     function (session,args,next){
-        session.send('paris');
         var User = require('../models/user');
         var location = builder.EntityRecognizer.findEntity(args.entities,'builtin.geography.country');
         if (!location){
@@ -21,11 +20,11 @@ module.exports = function (intents,builder){
                 }
                 var msg = new builder.Message(session).attachments(attachments);
                 session.send(msg);
-            }
+            } else{
             session.send("Sorry couldn't find anyone");
+            }
         });
         }
-        console.log(location.entity);
         User.find({"residence_country":location.entity},function(err,campers){
             if (campers.length > 0){
                 attachments = [];
@@ -39,7 +38,9 @@ module.exports = function (intents,builder){
                 var msg = new builder.Message(session).attachments(attachments);
                 session.send(msg);
             }
-            session.send("Sorry couldn't find anyone");
+            else{
+                session.send("Sorry couldn't find anyone");
+            }
         });
     }
  ]);
