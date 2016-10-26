@@ -25,9 +25,14 @@ module.exports = function (bot, builder, User){
                 "photographer" : 'photography',
                 "videographer" : 'videography',
                 "seller"       : 'selling',
-                "teacher"      : 'teaching'
+                "teacher"      : 'teaching',
+                "it"           : 'programming',
+                "programmin"   : 'programming',
+                "IT"           : 'programming'
             };
-            skills = results.response.split(' ');
+            skills = results.response
+            skills = skills.replace(/,/g,' ');
+            skills = skills.split(' ');
             var found = 0;
             for(i=0;i<skills.length;i++) {
                 if (unneccessary.indexOf(skills[i]) == -1) {
