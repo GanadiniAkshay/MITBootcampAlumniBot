@@ -10,7 +10,8 @@ module.exports = function (intents,builder){
                 session.send("Not sure I know what that place is. Try searching by country");
             }
         }
-        User.find({"residence_country":"India"},function(err,campers){
+        console.log(location.entity);
+        User.find({"residence_country":location.entity},function(err,campers){
             console.log(campers);
             session.send('found');
         });
