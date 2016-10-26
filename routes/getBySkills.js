@@ -41,7 +41,7 @@ module.exports = function (bot, builder, User){
                                 attachments.push(
                                     new builder.HeroCard(session)
                                         .title(campers[j]['name'])
-                                        .subtitle("Lives in " + campers[j]['residence_country'] + '. email : ' + campers[j]['email'])
+                                        .subtitle(campers[j]["cohort"] + " Lives in " + campers[j]['residence_country'] + '. email : ' + campers[j]['email'])
                                 )
                             }
                             var msg = new builder.Message(session).attachments(attachments);
