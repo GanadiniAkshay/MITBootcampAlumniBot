@@ -24,11 +24,11 @@ module.exports = function (intents,builder){
                         "seller"       : 'selling',
                         "teacher"      : 'teaching'
                     };
-
+                    skill = skill.entity;
                     if (skill in profession_map){
                         skill = profession_map[skill]
                     }
-                    session.endDialog(skill);
+                    session.endDialog("skilled");
                 }else{
                     session.endDialog("Sorry couldn't understand that");
                 }
