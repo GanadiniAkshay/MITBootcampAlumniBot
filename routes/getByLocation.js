@@ -6,8 +6,9 @@ module.exports = function (bot, builder, User){
         function (session,results){
             session.send('Searching for bootcampers...')
             session.sendTyping();
-            location = results.response.split(' ')[0].toLowerCase();
-            session.send(Location);
+            locations = results.response.split(' ');
+            location = locations[locations.length-1].toLowerCase();
+            session.send(location);
             session.endDialog();
         }
     ]);
