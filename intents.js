@@ -11,4 +11,5 @@ module.exports = function (intents,builder){
     require('./intents/whatVisa.js')(intents,builder);
     require('./intents/getByLocation.js')(intents,builder);
     require('./intents/whatSkill.js')(intents,builder);
+    require('./intents/conversation.js')(intents,builder);
 }

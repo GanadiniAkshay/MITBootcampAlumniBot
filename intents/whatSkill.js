@@ -4,7 +4,8 @@ module.exports = function (intents,builder){
             if (session.userData.isBootcamper != 'true'){
                 session.endDialog('You can ask general questions about the bootcamp');
             }else{
-                session.send("Searching for bootcampers");
+                session.send("Searching for bootcampers...");
+                session.sendTyping();
                 var User = require('../models/user');
                 var skill = builder.EntityRecognizer.findEntity(args.entities,'skill');
                 if (skill){
