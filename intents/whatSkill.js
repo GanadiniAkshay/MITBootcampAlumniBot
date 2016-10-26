@@ -5,7 +5,8 @@ module.exports = function (intents,builder){
                 session.endDialog('You can ask general questions about the bootcamp');
             }else{
                 session.send("Searching for bootcampers");
-                console.log(args);
+                var skill = builder.EntityRecognizer.findEntity(args.entity,'skill');
+                console.log(skill);
             }
         }
     ])
