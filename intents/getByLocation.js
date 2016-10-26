@@ -10,7 +10,7 @@ module.exports = function (intents,builder){
                 session.send("Not sure I know what that place is. Try searching by country");
             }
         }
-        User.find({"email":"akshaykulkarni.2104@gmail.com"},function(err,campers){
+        User.find({"residence_country":"India"},function(err,campers){
             console.log(campers);
             session.send('found');
         });
