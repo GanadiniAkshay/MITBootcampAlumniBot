@@ -32,7 +32,7 @@ module.exports = function(bot,builder,User,client){
                 session.send('Oops sorry :(');
                 session.send("But I couldn't find your email in the list of bootcampers");
                 session.send('Please fill this form to request access https://akshaykulkarni.typeform.com/to/RZq14y');
-                session.send("You can still ask me general stuff about the bootcamp or disciplined entrepreneurship");
+                session.send("You can still ask me general stuff about the bootcamp");
                 session.endDialog();
             }
         });
@@ -42,7 +42,7 @@ module.exports = function(bot,builder,User,client){
         if (otp == session.privateConversationData.otp){
             session.privateConversationData.otp = "";
             session.userData.isBootcamper = 'true';
-            session.send("You can ask me questions about the alumni or general stuff about bootcamp or disciplined entrepreneurship");
+            session.send("You can ask me questions about the alumni or general stuff about bootcamp");
             session.endDialog();
         }else{
             builder.Prompts.text(session,"Sorry that's wrong, please enter the correct one time password");
@@ -53,10 +53,10 @@ module.exports = function(bot,builder,User,client){
         if (otp == session.privateConversationData.otp){
             session.privateConversationData.otp = "";
             session.userData.isBootcamper = 'true';
-            session.send("You can ask me questions about the alumni or general stuff about bootcamp or disciplined entrepreneurship");
+            session.send("You can ask me questions about the alumni or general stuff about bootcamp");
         } else{
             session.send("Sorry, couldn't verify your email");
-            session.send("You can still ask me general stuff about the bootcamp or disciplined entrepreneurship");
+            session.send("You can still ask me general stuff about the bootcamp");
         }
         session.endDialog();
     }

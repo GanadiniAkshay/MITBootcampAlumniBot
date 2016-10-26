@@ -2,6 +2,10 @@ module.exports = function (intents,builder){
     intents.matches('whatAlumni',[
     function (session){
         session.sendTyping();
+        if (session.userData.isBootcamper != 'true')
+        {
+            session.endDialog('You can ask general questions about the bootcamp');
+        }
         session.send("Here are somethings you can ask");
         
         // Ask the user to select an item from a carousel.
