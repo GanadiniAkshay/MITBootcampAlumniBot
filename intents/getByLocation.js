@@ -4,7 +4,7 @@ module.exports = function (intents,builder){
         session.send('paris');
         var location = builder.EntityRecognizer.findEntity(args.entities,'builtin.geography.country');
         if (!location){
-            var location = builder.EntityRecognizer.findEntity(args.entities,'builtin.geography.country');
+            var location = builder.EntityRecognizer.findEntity(args.entities,'builtin.geography.city');
         }
         console.log(location);
     }
