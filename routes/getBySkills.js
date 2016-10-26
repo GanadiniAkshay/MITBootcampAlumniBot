@@ -1,7 +1,11 @@
 module.exports = function (bot, builder, User){
     bot.dialog('/searchBySkills',[
         function (session){
-            builder.Prompts.text(session,"What skills are you looking for?");
+            if (session.userData.isBootcamper != 'true'){
+                session.endDialog('You can ask general questions about the bootcamp');
+            }else{
+                builder.Prompts.text(session,"What skills are you looking for?");
+            }
         },
         function (session,results,next){
             session.send('Searching for bootcampers with those skills....')

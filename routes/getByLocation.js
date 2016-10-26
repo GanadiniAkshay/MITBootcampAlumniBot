@@ -1,7 +1,11 @@
 module.exports = function (bot, builder, User){
     bot.dialog('/searchByLocation',[
         function (session,args,next){
-            builder.Prompts.text(session,"Which country do you want to find bootcampers in?");
+            if (session.userData.isBootcamper != 'true'){
+                session.endDialog('Sorry I can provide this info only to alumni');
+            }else{
+                builder.Prompts.text(session,"Which country do you want to find bootcampers in?");
+            }
         },
         function (session,results){
             session.send('Searching for bootcampers...')
