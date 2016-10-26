@@ -3,9 +3,10 @@ module.exports = function (intents,builder){
     function (session,args,next){
         session.send('paris');
         var location = builder.EntityRecognizer.findEntity(args.entities,'builtin.geography.country');
-        if (location){
-            console.log(location);
+        if (!location){
+            var location = builder.EntityRecognizer.findEntity(args.entities,'builtin.geography.country');
         }
+        console.log(location);
     }
  ]);
 }
