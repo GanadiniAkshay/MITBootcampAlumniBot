@@ -11,7 +11,7 @@ module.exports = function (intents,builder){
             }
         }
         console.log(location.entity);
-        User.find({"residence_country":"india"},function(err,campers){
+        User.find({"residence_country":location.entity},function(err,campers){
             console.log(campers);
             session.send('found');
         });
