@@ -10,4 +10,5 @@ module.exports = function (intents,builder){
     require('./intents/whyPitch.js')(intents,builder);
     require('./intents/whatVisa.js')(intents,builder);
     require('./intents/getByLocation.js')(intents,builder);
+    require('./intents/whatSkill.js')(intents,builder);
 }
