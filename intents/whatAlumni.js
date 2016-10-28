@@ -30,7 +30,7 @@ module.exports = function (intents,builder){
                             builder.CardAction.imBack(session, "select:102", "Search by Location")
                         ])
                 ]);
-            builder.Prompts.choice(session, msg, "select:100|select:101|select:102|select:103");
+            builder.Prompts.choice(session, msg, "select:101|select:102");
         }
     },
     function (session, results) {
@@ -42,17 +42,11 @@ module.exports = function (intents,builder){
                 break;
         }
         switch (kvPair[1]) {
-            case '100':
-                session.beginDialog('/searchByName');
-                break;
             case '101':
                 session.beginDialog('/searchBySkills');
                 break;
             case '102':
                 session.beginDialog('/searchByLocation');
-                break;
-            case '103':
-                session.beginDialog('/searchByLanguage');
                 break;
         }
     }  

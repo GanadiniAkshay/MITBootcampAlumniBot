@@ -25,10 +25,22 @@ module.exports = function (bot, builder, User){
                 session.privateConversationData.questionAsked = 'getByLocation';
                 var msg = new builder.Message(session).attachments(attachments);
                 session.send(msg);
-                            var replyMessage = new builder.Message(session)
+                var menuMessage = new builder.Message(session);
+
+                menuMessage.sourceEvent({ 
+                                    facebook: { 
+                                        quick_replies: [{
+                                            content_type:"text",
+                                            title:"Menu",
+                                            payload:"menu"
+                                        }]
+                                    }
+                                });
+                session.send(menuMessage);
+                var replyMessage = new builder.Message(session)
                                             .text('Ask again?');
 
-                            replyMessage.sourceEvent({ 
+                replyMessage.sourceEvent({ 
                                     facebook: { 
                                         quick_replies: [{
                                             content_type:"text",
@@ -42,7 +54,7 @@ module.exports = function (bot, builder, User){
                                         }]
                                     }
                                 });
-                            session.endDialog(replyMessage);
+                session.endDialog(replyMessage);
             }
             else{
                 session.endDialog("Sorry couldn't find anyone");
