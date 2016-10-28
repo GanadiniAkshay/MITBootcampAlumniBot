@@ -10,6 +10,18 @@ module.exports = function (intents,builder){
                         session.beginDialog('/verifyEmail');
                     }
                     break;
+                case 'getBySkills':
+                    session.privateConversationData.questionAsked = "";
+                    if (sessoion.userData.isBootcamper){
+                        session.beginDialog('/searchBySkills');
+                    }
+                    break;
+                case 'getByLocation':
+                    session.privateConversationData.questionAsked = "";
+                    if (sessoion.userData.isBootcamper){
+                        session.beginDialog('/searchByLocation');
+                    }
+                    break;
                 default:
                     session.send("Sorry, something went wrong. What can I help you with?");
                     break;

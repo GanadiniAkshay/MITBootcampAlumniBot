@@ -53,8 +53,27 @@ module.exports = function (bot, builder, User){
                                         .subtitle(campers[j]["cohort"] + " Lives in " + campers[j]['residence_country'] + '. email : ' + campers[j]['email'])
                                 )
                             }
+                            session.privateConversationData.questionAsked = 'getBySkills';
                             var msg = new builder.Message(session).attachments(attachments);
-                            session.endDialog(msg);
+                            session.send(msg);
+                            var replyMessage = new builder.Message(session)
+                                            .text('Ask again?');
+
+                            replyMessage.sourceEvent({ 
+                                    facebook: { 
+                                        quick_replies: [{
+                                            content_type:"text",
+                                            title:"Yes",
+                                            payload:"yes"
+                                        },            
+                                        {
+                                            content_type:"text",
+                                            title:"No",
+                                            payload:"no"
+                                        }]
+                                    }
+                                });
+                            session.endDialog(replyMessage);
                         }
 
                         else{
@@ -66,3 +85,4 @@ module.exports = function (bot, builder, User){
         }
     ]);
 }
+

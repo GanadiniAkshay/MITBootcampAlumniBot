@@ -10,6 +10,12 @@ module.exports = function (intents, builder){
                     session.send("That's okay");
                     session.send("Btw I can answer any questions you have about the bootcamp");
                     break;
+                case 'getBySkills':
+                    session.privateConversationData.questionAsked = "";
+                    break;
+                case 'getByLocation':
+                    session.privateConversationData.questionAsked = "";
+                    break;
                 default:
                     session.send("Sorry, something went wrong. What can I help you with?");
                     break;
