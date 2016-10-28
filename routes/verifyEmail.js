@@ -5,6 +5,7 @@ module.exports = function(bot,builder,User,client){
     },
     function (session,results){
         email = results.response;
+        email = email.toLowerCase();
         User.findOne({'email':email},function (err, user){
             if (err){
                 console.log(err);
