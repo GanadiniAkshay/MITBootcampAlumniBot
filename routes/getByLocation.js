@@ -45,7 +45,26 @@ module.exports = function (bot, builder, User){
                 session.endDialog(replyMessage);
             }
             else{
-                session.endDialog("Sorry couldn't find anyone");
+                session.privateConversationData.questionAsked = 'getByLocation';
+                session.send("Sorry couldn't find anyone from that location");
+                var replyMessage = new builder.Message(session)
+                                            .text('Ask again?');
+
+                replyMessage.sourceEvent({ 
+                                    facebook: { 
+                                        quick_replies: [{
+                                            content_type:"text",
+                                            title:"Yes",
+                                            payload:"yes"
+                                        },            
+                                        {
+                                            content_type:"text",
+                                            title:"No",
+                                            payload:"no"
+                                        }]
+                                    }
+                                });
+                session.endDialog(replyMessage);
             }
         });
         }

@@ -77,7 +77,26 @@ module.exports = function (bot, builder, User){
                         }
 
                         else{
-                                session.endDialog("Couldn't find any bootcampers with those skills");
+                                session.privateConversationData.questionAsked = 'getBySkills';
+                                session.send("Couldn't find any bootcampers with those skills");
+                                var replyMessage = new builder.Message(session)
+                                            .text('Ask again?');
+
+                            replyMessage.sourceEvent({ 
+                                    facebook: { 
+                                        quick_replies: [{
+                                            content_type:"text",
+                                            title:"Yes",
+                                            payload:"yes"
+                                        },            
+                                        {
+                                            content_type:"text",
+                                            title:"No",
+                                            payload:"no"
+                                        }]
+                                    }
+                                });
+                            session.endDialog(replyMessage);
                         }
                     })
                 } 
