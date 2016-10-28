@@ -12,13 +12,13 @@ module.exports = function (intents,builder){
                     break;
                 case 'getBySkills':
                     session.privateConversationData.questionAsked = "";
-                    if (sessoion.userData.isBootcamper){
+                    if (session.userData.isBootcamper){
                         session.beginDialog('/searchBySkills');
                     }
                     break;
                 case 'getByLocation':
                     session.privateConversationData.questionAsked = "";
-                    if (sessoion.userData.isBootcamper){
+                    if (session.userData.isBootcamper){
                         session.beginDialog('/searchByLocation');
                     }
                     break;
