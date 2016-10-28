@@ -42,6 +42,7 @@ module.exports = function (bot, builder, User){
                                         }]
                                     }
                                 });
+                session.sendTyping();
                 session.endDialog(replyMessage);
             }
             else{
