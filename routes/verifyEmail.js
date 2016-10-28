@@ -42,21 +42,6 @@ module.exports = function(bot,builder,User,client){
         if (otp == session.privateConversationData.otp){
             session.privateConversationData.otp = "";
             session.userData.isBootcamper = 'true';
-            session.send("You can ask me questions about the alumni or general stuff about bootcamp");
-            session.endDialog();
-        }else{
-            builder.Prompts.text(session,"Sorry that's wrong, please enter the correct one time password");
-        }
-    },
-    function(session, results){
-        otp = results.response;
-        if (otp == session.privateConversationData.otp){
-            session.privateConversationData.otp = "";
-            session.userData.isBootcamper = 'true';
-            session.sendTyping();
-        if (session.userData.isBootcamper != 'true'){
-            session.endDialog('You can ask general questions about the bootcamp');
-        } else{
             session.send("Here are somethings you can ask");
             
             // Ask the user to select an item from a carousel.
@@ -83,8 +68,7 @@ module.exports = function(bot,builder,User,client){
                         ])
                 ]);
             builder.Prompts.choice(session, msg, "select:101|select:102");
-        }
-        } else{
+        }else{
             session.send("Sorry, couldn't verify your email");
             session.send("You can still ask me general stuff about the bootcamp");
             session.endDialog();
