@@ -20,7 +20,7 @@ module.exports = function (intents,builder){
                         attachments.push(
                             new builder.HeroCard(session)
                                 .title(campers[j]['name'])
-                                .subtitle(campers[j]["cohort"] + " Lives in " + campers[j]['residence_country'] + '. email : ' + campers[j]['email'])
+                                .subtitle(campers[j]["cohort"] + " Lives in " + campers[j]['residence_country'][0] + '. email : ' + campers[j]['email'])
                         )
                     }
                     var msg = new builder.Message(session).attachments(attachments);
